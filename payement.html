@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#e91e63">
+    <title>Paiement - Beauté Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e91e63;
+            --primary-light: #f48fb1;
+            --primary-dark: #c2185b;
+            --secondary: #7b1fa2;
+            --stripe: #635bff;
+            --stripe-dark: #4a43d4;
+            --paypal: #003087;
+            --paypal-light: #009cde;
+            --success: #4caf50;
+            --light-pink: #fce4ec;
+            --light-purple: #f3e5f5;
+            --border-radius: 10px;
+            --border-radius-round: 15px;
+            --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 5px 14px rgba(0, 0, 0, 0.12);
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+            color: #5d4037;
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .payment-container {
+            width: 100%;
+            max-width: 340px;
+            margin: auto;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.12);
+            border: 1px solid #f8bbd9;
+        }
+        
+        /* Header ultra compact */
+        .payment-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 16px 14px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .payment-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        
+        .payment-title h1 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .payment-title i {
+            font-size: 18px;
+        }
+        
+        .payment-subtitle {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        
+        /* Bouton Retour mini */
+        .payment-retour {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 12px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .payment-retour:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Content ultra compact */
+        .payment-content {
+            padding: 18px 16px;
+        }
+        
+        /* Options de Paiement */
+        .payment-options {
+            margin: 0 0 20px 0;
+        }
+        
+        .options-title {
+            color: var(--secondary);
+            margin-bottom: 14px;
+            font-size: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        /* Boutons Paiement ULTRA COMPACTS */
+        .payment-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 0 0 16px 0;
+        }
+        
+        .payment-btn {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: var(--border-radius-round);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            text-decoration: none;
+            color: white;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .payment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .payment-btn.stripe {
+            background: linear-gradient(135deg, var(--stripe), var(--stripe-dark));
+        }
+        
+        .payment-btn.paypal {
+            background: linear-gradient(135deg, var(--paypal), var(--paypal-light));
+        }
+        
+        .payment-btn i {
+            font-size: 16px;
+            width: 20px;
+        }
+        
+        .btn-text {
+            flex-grow: 1;
+            text-align: left;
+            font-size: 12px;
+            padding: 0 8px;
+        }
+        
+        /* Informations Sécurité */
+        .security-info {
+            background: linear-gradient(135deg, #f0f9f0, #d8f5d8);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 14px 0;
+            border: 1px solid #c8e6c9;
+            text-align: center;
+        }
+        
+        .security-title {
+            color: var(--success);
+            margin-bottom: 6px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .security-content {
+            font-size: 11px;
+            color: #2e7d32;
+            line-height: 1.3;
+        }
+        
+        /* Footer compact */
+        .payment-footer {
+            text-align: center;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+            color: white;
+            font-size: 10px;
+        }
+        
+        /* Modal Confirmation compact */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(233, 30, 99, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            animation: popIn 0.25s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--primary-light);
+        }
+        
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .modal-icon {
+            font-size: 40px;
+            color: var(--success);
+            margin-bottom: 12px;
+        }
+        
+        .modal-title {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .modal-message {
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 12px;
+            line-height: 1.3;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-round);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
+        }
+        
+        /* Version mobile ultra compacte */
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            
+            .payment-container {
+                max-width: 100%;
+                border-radius: 12px;
+            }
+            
+            .payment-header {
+                padding: 14px 12px;
+            }
+            
+            .payment-title h1 {
+                font-size: 15px;
+            }
+            
+            .payment-content {
+                padding: 16px 14px;
+            }
+            
+            .payment-btn {
+                padding: 11px 14px;
+                font-size: 12px;
+            }
+            
+            .payment-btn i {
+                font-size: 15px;
+                width: 18px;
+            }
+            
+            .btn-text {
+                font-size: 11px;
+            }
+            
+            .payment-retour {
+                top: 10px;
+                left: 10px;
+                width: 26px;
+                height: 26px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <!-- Bouton Retour mini -->
+        <button class="payment-retour" onclick="history.back()" title="Retour">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <!-- Header ultra compact -->
+        <header class="payment-header">
+            <div class="payment-title">
+                <i class="fas fa-credit-card"></i>
+                <h1>Paiement</h1>
+            </div>
+            <p class="payment-subtitle">Finalisez votre inscription</p>
+        </header>
+        
+        <!-- Contenu Principal ultra compact -->
+        <main class="payment-content">
+            <!-- Options de Paiement -->
+            <div class="payment-options">
+                <h2 class="options-title">
+                    <i class="fas fa-lock"></i>
+                    Moyen de paiement
+                </h2>
+                
+                <!-- Boutons de Paiement ultra compacts -->
+                <div class="payment-buttons">
+                    <!-- Stripe -->
+                    <a href="https://buy.stripe.com/test_XXXXXXXXXXXXX" class="payment-btn stripe" id="stripe-btn" target="_blank">
+                        <i class="fab fa-stripe"></i>
+                        <span class="btn-text">Payer avec Stripe</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    
+                    <!-- PayPal -->
+                    <a href="https://www.paypal.com/checkoutnow?token=XXXXXXXXXX" class="payment-btn paypal" id="paypal-btn" target="_blank">
+                        <i class="fab fa-paypal"></i>
+                        <span class="btn-text">Payer avec PayPal</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Informations Sécurité -->
+            <div class="security-info">
+                <h3 class="security-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Paiement Sécurisé
+                </h3>
+                <p class="security-content">
+                    Transactions cryptées SSL • Données protégées
+                </p>
+            </div>
+        </main>
+        
+        <!-- Footer compact -->
+        <footer class="payment-footer">
+            <p>© 2026 Beauté Pro</p>
+            <p style="margin-top: 4px; font-size: 9px; opacity: 0.9;">
+                <i class="fas fa-award"></i>
+                Formation certifiante
+            </p>
+        </footer>
+    </div>
+    
+    <!-- Modal de Confirmation -->
+    <div class="confirmation-modal" id="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="modal-title">Paiement Réussi !</h2>
+            <p class="modal-message">
+                Merci pour votre paiement.<br>
+                Vous recevrez un email de confirmation.
+            </p>
+            <button class="modal-btn" id="modal-close-btn">
+                <i class="fas fa-home"></i>
+                Retour
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestion du bouton retour
+            document.querySelector('.payment-retour').addEventListener('click', function() {
+                history.back();
+            });
+            
+            // Gestion du modal de confirmation
+            document.getElementById('modal-close-btn').addEventListener('click', function() {
+                document.getElementById('confirmation-modal').style.display = 'none';
+                window.location.href = 'formations.html';
+            });
+            
+            // Fermer modal en cliquant à l'extérieur
+            document.getElementById('confirmation-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                    window.location.href = 'formations.html';
+                }
+            });
+            
+            // Simuler le processus de paiement (pour démo)
+            setupPaymentButtons();
+        });
+
+        function setupPaymentButtons() {
+            // Stripe
+            document.getElementById('stripe-btn').addEventListener('click', function(e) {
+                // Pour la démo, on intercepte le clic et montre le modal
+                e.preventDefault();
+                showMessage("Redirection vers Stripe...", "info");
+                
+                // Simuler un délai de redirection
+                setTimeout(() => {
+                    document.getElementById('confirmation-modal').style.display = 'flex';
+                }, 800);
+                
+                // En production, la redirection se ferait automatiquement
+                // via l'attribut href du lien
+            });
+            
+            // PayPal
+            document.getElementById('paypal-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showMessage("Redirection vers PayPal...", "info");
+                
+                setTimeout(() => {
+                    document.getElementById('confirmation-modal').style.display = 'flex';
+                }, 800);
+            });
+        }
+
+        function showMessage(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 12px;
+                right: 12px;
+                left: 12px;
+                max-width: 300px;
+                margin: 0 auto;
+                padding: 10px 14px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                text-align: center;
+                z-index: 1500;
+                animation: slideDown 0.2s ease;
+                background: ${type === 'success' ? '#4CAF50' : 
+                          type === 'error' ? '#F44336' : '#2196F3'};
+                box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+                font-size: 12px;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideUp 0.2s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 200);
+            }, 1200);
+            
+            // Ajouter les animations CSS si elles n'existent pas
+            if (!document.querySelector('#notif-anim')) {
+                const style = document.createElement('style');
+                style.id = 'notif-anim';
+                style.textContent = `
+                    @keyframes slideDown {
+                        from { transform: translateY(-60px); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                    @keyframes slideUp {
+                        from { transform: translateY(0); opacity: 1; }
+                        to { transform: translateY(-60px); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+    </script>
+</body>
+</html>
