@@ -16,6 +16,7 @@
             --paypal-light: #009cde;
             --whatsapp: #25D366;
             --success: #4caf50;
+            --history: #ff9800;
             --light-pink: #fce4ec;
             --border-radius: 10px;
             --border-radius-round: 12px;
@@ -45,7 +46,7 @@
         
         .payment-container {
             width: 100%;
-            max-width: 320px;
+            max-width: 380px;
             background: white;
             border-radius: 16px;
             overflow: hidden;
@@ -59,7 +60,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Header ultra compact */
+        /* Header */
         .payment-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -93,7 +94,41 @@
             font-weight: 400;
         }
         
-        /* Bouton Retour mini */
+        /* Menu Onglets */
+        .tabs-menu {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Bouton Retour */
         .payment-retour {
             position: absolute;
             top: 14px;
@@ -118,12 +153,27 @@
             transform: translateY(-1px);
         }
         
-        /* Content ultra compact */
+        /* Content */
         .payment-content {
             padding: 20px 16px;
         }
         
-        /* Message principal compact */
+        /* Onglet Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Message principal */
         .main-message {
             text-align: center;
             margin-bottom: 20px;
@@ -136,12 +186,7 @@
             margin-bottom: 15px;
         }
         
-        .highlight {
-            color: var(--primary-dark);
-            font-weight: 600;
-        }
-        
-        /* Bouton PayPal.me ULTRA COMPACT */
+        /* Bouton PayPal */
         .paypal-btn-container {
             margin: 20px 0;
             text-align: center;
@@ -172,12 +217,148 @@
             background: linear-gradient(135deg, #002f83, #0088cc);
         }
         
-        .paypal-btn:active {
-            transform: translateY(0);
-        }
-        
         .paypal-btn i {
             font-size: 16px;
+        }
+        
+        /* Nouveau paiement */
+        .new-payment-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-round);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            max-width: 240px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .new-payment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+            background: linear-gradient(135deg, var(--primary-dark), #6a1b9a);
+        }
+        
+        /* Historique des paiements */
+        .history-section {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .history-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .history-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--primary-light);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .history-reference {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: var(--light-pink);
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+        
+        .history-date {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .history-details {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.5;
+        }
+        
+        .history-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .history-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .history-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .history-amount {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--success);
+            text-align: right;
+            margin-top: 8px;
+        }
+        
+        .history-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-pending {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        /* Aucun historique */
+        .no-history {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+        }
+        
+        .no-history i {
+            font-size: 40px;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .no-history p {
+            font-size: 14px;
+            line-height: 1.5;
         }
         
         /* Formulaire client */
@@ -268,41 +449,12 @@
             max-width: 240px;
             width: 100%;
             margin-top: 10px;
-            text-decoration: none;
         }
         
         .whatsapp-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--box-shadow-hover);
             background: linear-gradient(135deg, #1ebe5d, #0d8c6e);
-        }
-        
-        /* Bouton Accueil */
-        .home-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: var(--border-radius-round);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
-            max-width: 240px;
-            width: 100%;
-            margin-top: 10px;
-            text-decoration: none;
-        }
-        
-        .home-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--box-shadow-hover);
-            background: linear-gradient(135deg, var(--primary-dark), #6a1b9a);
         }
         
         /* Section de confirmation */
@@ -408,7 +560,7 @@
             font-weight: 800;
         }
         
-        /* Instructions simples */
+        /* Instructions */
         .instructions {
             font-size: 11px;
             color: #666;
@@ -417,7 +569,7 @@
             line-height: 1.4;
         }
         
-        /* Footer ultra compact */
+        /* Footer */
         .payment-footer {
             text-align: center;
             padding: 14px;
@@ -433,7 +585,7 @@
             color: #f48fb1;
         }
         
-        /* Version mobile ultra compacte */
+        /* Version mobile */
         @media (max-width: 480px) {
             body {
                 padding: 12px;
@@ -456,7 +608,7 @@
                 padding: 18px 14px;
             }
             
-            .paypal-btn, .whatsapp-btn, .home-btn {
+            .paypal-btn, .whatsapp-btn, .new-payment-btn {
                 padding: 11px 20px;
                 font-size: 13px;
                 max-width: 220px;
@@ -470,17 +622,18 @@
                 font-size: 12px;
             }
             
-            .amount-value {
-                font-size: 20px;
+            .history-item {
+                padding: 12px;
             }
             
-            .success-icon {
-                font-size: 35px;
+            .tab-btn {
+                font-size: 11px;
+                padding: 8px;
             }
         }
         
         @media (max-width: 360px) {
-            .paypal-btn, .whatsapp-btn, .home-btn {
+            .paypal-btn, .whatsapp-btn, .new-payment-btn {
                 padding: 10px 18px;
                 font-size: 12px;
                 max-width: 200px;
@@ -498,145 +651,182 @@
 </head>
 <body>
     <div class="payment-container">
-        <!-- Bouton Retour mini -->
-        <button class="payment-retour" onclick="history.back()" title="Retour">
-            <i class="fas fa-arrow-left"></i>
+        <!-- Bouton Retour -->
+        <button class="payment-retour" onclick="goToHomePage()" title="Retour boutique">
+            <i class="fas fa-store"></i>
         </button>
 
-        <!-- Header compact -->
+        <!-- Header -->
         <header class="payment-header">
             <div class="payment-title">
-                <i class="fab fa-paypal"></i>
-                <h1>Paiement Formation</h1>
+                <i class="fas fa-credit-card"></i>
+                <h1>Gestion Paiements</h1>
             </div>
-            <p class="payment-subtitle">Finalisez votre inscription</p>
+            <p class="payment-subtitle">Formations Beauté Pro</p>
+            
+            <!-- Menu Onglets -->
+            <div class="tabs-menu">
+                <button class="tab-btn active" data-tab="payment">
+                    <i class="fas fa-plus-circle"></i>
+                    Nouveau
+                </button>
+                <button class="tab-btn" data-tab="history">
+                    <i class="fas fa-history"></i>
+                    Historique
+                </button>
+            </div>
         </header>
         
         <!-- Contenu Principal -->
         <main class="payment-content">
-            <!-- Message principal -->
-            <div class="main-message">
-                <p class="message-text">
-                    Pour finaliser votre réservation,<br>
-                    cliquez sur le bouton ci-dessous.
+            <!-- Onglet : Nouveau Paiement -->
+            <div class="tab-content active" id="payment-tab">
+                <!-- Message principal -->
+                <div class="main-message">
+                    <p class="message-text">
+                        Pour effectuer un nouveau paiement,<br>
+                        cliquez sur le bouton ci-dessous.
+                    </p>
+                </div>
+                
+                <!-- Section Montant -->
+                <div class="amount-display">
+                    <span class="amount-label">Montant à payer :</span>
+                    <div class="amount-value" id="amount-value">299€</div>
+                </div>
+                
+                <!-- Bouton PayPal -->
+                <div class="paypal-btn-container">
+                    <button class="paypal-btn" id="paypal-btn">
+                        <i class="fab fa-paypal"></i>
+                        Nouveau Paiement PayPal
+                    </button>
+                </div>
+                
+                <!-- Formulaire client (masqué au début) -->
+                <div class="client-form" id="client-form">
+                    <h3 class="form-title">
+                        <i class="fas fa-user"></i>
+                        Vos informations
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="client-name" class="form-label">Nom complet *</label>
+                        <input type="text" id="client-name" class="form-input" placeholder="Votre nom et prénom" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-phone" class="form-label">Téléphone *</label>
+                        <input type="tel" id="client-phone" class="form-input" placeholder="Votre numéro" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-formation" class="form-label">Formation choisie *</label>
+                        <select id="client-formation" class="form-select" required>
+                            <option value="">Sélectionnez</option>
+                            <option value="maquillage">Maquillage Professionnel (299€)</option>
+                            <option value="ongles">Ongles Gel Complet (349€)</option>
+                            <option value="effets">Effets Spéciaux (399€)</option>
+                            <option value="combinee">Formation Combinée (599€)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-email" class="form-label">Email</label>
+                        <input type="email" id="client-email" class="form-input" placeholder="Votre email">
+                    </div>
+                    
+                    <div class="paypal-btn-container">
+                        <button class="whatsapp-btn" id="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i>
+                            Envoyer la confirmation
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Section de confirmation -->
+                <div class="confirmation-info" id="confirmation-info">
+                    <h3 class="confirmation-title">
+                        <i class="fas fa-check-circle"></i>
+                        Paiement effectué ?
+                    </h3>
+                    <p class="confirmation-content">
+                        Merci d'avoir effectué votre paiement.<br>
+                        Veuillez remplir vos informations pour<br>
+                        confirmer votre inscription.
+                    </p>
+                </div>
+                
+                <!-- Section succès après envoi WhatsApp -->
+                <div class="success-section" id="success-section">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="success-title">Confirmation Envoyée !</h3>
+                    <p class="success-message">
+                        Votre confirmation a été envoyée avec succès.<br>
+                        Nous vous contacterons très prochainement.
+                    </p>
+                    <div class="paypal-btn-container">
+                        <button class="new-payment-btn" id="new-payment-after-success">
+                            <i class="fas fa-plus-circle"></i>
+                            Nouveau Paiement
+                        </button>
+                    </div>
+                    <p style="font-size: 11px; color: #666; margin-top: 15px;">
+                        Redirection boutique dans <span id="countdown">5</span> secondes...
+                    </p>
+                </div>
+                
+                <!-- Instructions -->
+                <p class="instructions" id="instructions">
+                    <i class="fas fa-info-circle"></i> 
+                    Après paiement, remplissez le formulaire ci-dessus<br>
+                    pour envoyer votre confirmation par WhatsApp
                 </p>
             </div>
             
-            <!-- Section Montant -->
-            <div class="amount-display">
-                <span class="amount-label">Montant à payer :</span>
-                <div class="amount-value">299€</div>
-            </div>
-            
-            <!-- Bouton PayPal.me -->
-            <div class="paypal-btn-container">
-                <button class="paypal-btn" id="paypal-btn">
-                    <i class="fab fa-paypal"></i>
-                    Payer avec PayPal
-                </button>
-            </div>
-            
-            <!-- Formulaire client (masqué au début) -->
-            <div class="client-form" id="client-form">
-                <h3 class="form-title">
-                    <i class="fas fa-user"></i>
-                    Vos informations
-                </h3>
-                
-                <div class="form-group">
-                    <label for="client-name" class="form-label">Nom complet *</label>
-                    <input type="text" id="client-name" class="form-input" placeholder="Votre nom et prénom" required>
+            <!-- Onglet : Historique -->
+            <div class="tab-content" id="history-tab">
+                <div class="main-message">
+                    <p class="message-text">
+                        Historique de vos paiements<br>
+                        et confirmations envoyées.
+                    </p>
                 </div>
                 
-                <div class="form-group">
-                    <label for="client-phone" class="form-label">Téléphone *</label>
-                    <input type="tel" id="client-phone" class="form-input" placeholder="Votre numéro" required>
+                <!-- Historique des paiements -->
+                <div class="history-section" id="history-section">
+                    <!-- Les paiements seront chargés ici par JavaScript -->
                 </div>
                 
-                <div class="form-group">
-                    <label for="client-formation" class="form-label">Formation choisie *</label>
-                    <select id="client-formation" class="form-select" required>
-                        <option value="">Sélectionnez</option>
-                        <option value="maquillage">Maquillage Professionnel (299€)</option>
-                        <option value="ongles">Ongles Gel Complet (349€)</option>
-                        <option value="effets">Effets Spéciaux (399€)</option>
-                        <option value="combinee">Formation Combinée (599€)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="client-email" class="form-label">Email</label>
-                    <input type="email" id="client-email" class="form-input" placeholder="Votre email">
-                </div>
-                
-                <div class="paypal-btn-container">
-                    <button class="whatsapp-btn" id="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i>
-                        Envoyer la confirmation
+                <!-- Bouton nouveau paiement depuis l'historique -->
+                <div class="paypal-btn-container" style="margin-top: 20px;">
+                    <button class="new-payment-btn" id="new-payment-from-history">
+                        <i class="fas fa-plus-circle"></i>
+                        Nouveau Paiement
                     </button>
                 </div>
             </div>
-            
-            <!-- Section de confirmation -->
-            <div class="confirmation-info" id="confirmation-info">
-                <h3 class="confirmation-title">
-                    <i class="fas fa-check-circle"></i>
-                    Paiement effectué ?
-                </h3>
-                <p class="confirmation-content">
-                    Merci d'avoir effectué votre paiement.<br>
-                    Veuillez remplir vos informations pour<br>
-                    confirmer votre inscription.
-                </p>
-            </div>
-            
-            <!-- Section succès après envoi WhatsApp -->
-            <div class="success-section" id="success-section">
-                <div class="success-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h3 class="success-title">Confirmation Envoyée !</h3>
-                <p class="success-message">
-                    Votre confirmation a été envoyée avec succès.<br>
-                    Nous vous contacterons très prochainement<br>
-                    pour finaliser votre inscription.
-                </p>
-                <div class="paypal-btn-container">
-                    <button class="home-btn" id="home-btn">
-                        <i class="fas fa-home"></i>
-                        Retour à la boutique
-                    </button>
-                </div>
-                <p style="font-size: 11px; color: #666; margin-top: 15px;">
-                    Redirection automatique dans <span id="countdown">5</span> secondes...
-                </p>
-            </div>
-            
-            <!-- Instructions -->
-            <p class="instructions" id="instructions">
-                <i class="fas fa-info-circle"></i> 
-                Après paiement, remplissez le formulaire ci-dessus<br>
-                pour envoyer votre confirmation par WhatsApp
-            </p>
         </main>
         
-        <!-- Footer compact -->
+        <!-- Footer -->
         <footer class="payment-footer">
             <div class="footer-logo">
                 <i class="fas fa-spa"></i>
             </div>
             <p>© 2026 Beauté Pro</p>
             <p style="margin-top: 4px; font-size: 9px; opacity: 0.9;">
-                Formation certifiante
+                Gestion des paiements
             </p>
         </footer>
     </div>
 
     <script>
-        // Numéro WhatsApp pour envoi
+        // Configuration
         const WHATSAPP_NUMBER = "+33756950190";
         const PAYPAL_ME_LINK = "https://paypal.me/JEANSKODOC?locale.x=fr_XC&country.x=LS";
-        const HOME_PAGE_URL = "https://boutique-awa.netlify.app/"; // VOTRE PAGE D'ACCUEIL
+        const HOME_PAGE_URL = "https://boutique-awa.netlify.app/";
         
         // Prix des formations
         const FORMATION_PRICES = {
@@ -657,22 +847,25 @@
         let paymentData = {
             amount: 299,
             formation: 'maquillage',
-            reference: 'BP-' + Date.now().toString().slice(-8),
+            reference: generateReference(),
             date: new Date().toISOString().split('T')[0],
             clientName: '',
             clientPhone: '',
             clientEmail: '',
-            paymentMethod: 'PayPal'
+            paymentMethod: 'PayPal',
+            status: 'pending',
+            timestamp: Date.now()
         };
         
         let countdownInterval;
-        let countdownSeconds = 5; // Réduit à 5 secondes pour une meilleure UX
+        let countdownSeconds = 5;
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             initializePage();
             setupEventListeners();
             loadSavedData();
+            loadPaymentHistory();
         });
 
         function initializePage() {
@@ -684,9 +877,12 @@
         }
 
         function setupEventListeners() {
-            // Bouton retour
-            document.querySelector('.payment-retour').addEventListener('click', function() {
-                history.back();
+            // Onglets
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
             });
             
             // Bouton PayPal
@@ -706,9 +902,16 @@
                 sendWhatsAppConfirmation();
             });
             
-            // Bouton Accueil (Boutique)
-            document.getElementById('home-btn').addEventListener('click', function() {
-                goToHomePage();
+            // Bouton nouveau paiement après succès
+            document.getElementById('new-payment-after-success').addEventListener('click', function() {
+                resetPaymentForm();
+                switchTab('payment');
+            });
+            
+            // Bouton nouveau paiement depuis historique
+            document.getElementById('new-payment-from-history').addEventListener('click', function() {
+                resetPaymentForm();
+                switchTab('payment');
             });
             
             // Sauvegarder les données du formulaire
@@ -718,14 +921,36 @@
             });
         }
 
+        function switchTab(tabId) {
+            // Désactiver tous les onglets
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Activer l'onglet sélectionné
+            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            
+            // Recharger l'historique si on passe sur cet onglet
+            if (tabId === 'history') {
+                loadPaymentHistory();
+            }
+        }
+
         function startPaymentProcess() {
             // Ouvrir PayPal dans un nouvel onglet
             const paypalWindow = window.open(PAYPAL_ME_LINK, '_blank', 'noopener,noreferrer');
             
             // Enregistrer le début du paiement
             paymentData.paymentStartTime = Date.now();
-            localStorage.setItem('paymentStartTime', paymentData.paymentStartTime);
-            localStorage.setItem('paymentReference', paymentData.reference);
+            paymentData.reference = generateReference();
+            paymentData.status = 'pending';
+            
+            localStorage.setItem('currentPayment', JSON.stringify(paymentData));
             
             // Afficher notification
             showNotification("Redirection vers PayPal...", "info");
@@ -776,10 +1001,13 @@
                     // L'utilisateur est revenu de PayPal
                     paymentData.paymentCompleted = true;
                     paymentData.paymentReturnTime = Date.now();
+                    paymentData.status = 'completed';
                     
-                    // Enregistrer
-                    localStorage.setItem('paymentCompleted', 'true');
-                    localStorage.setItem('paymentReturnTime', Date.now().toString());
+                    // Mettre à jour le paiement courant
+                    const currentPayment = JSON.parse(localStorage.getItem('currentPayment') || '{}');
+                    currentPayment.status = 'completed';
+                    currentPayment.paymentReturnTime = Date.now();
+                    localStorage.setItem('currentPayment', JSON.stringify(currentPayment));
                     
                     // Notification
                     showNotification("Merci pour votre paiement !", "success");
@@ -824,7 +1052,10 @@
             const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
             
             // Ouvrir WhatsApp
-            const whatsappWindow = window.open(whatsappLink, '_blank');
+            window.open(whatsappLink, '_blank');
+            
+            // Sauvegarder le paiement dans l'historique
+            savePaymentToHistory();
             
             // Enregistrer l'envoi
             saveConfirmationSent();
@@ -837,7 +1068,7 @@
                 showSuccessSection();
             }, 1000);
             
-            // Démarrer le compte à rebours immédiatement (sans attendre la fermeture de WhatsApp)
+            // Démarrer le compte à rebours
             startCountdown();
         }
 
@@ -857,7 +1088,7 @@
 
         function startCountdown() {
             const countdownElement = document.getElementById('countdown');
-            countdownSeconds = 5; // 5 secondes seulement
+            countdownSeconds = 5;
             countdownElement.textContent = countdownSeconds;
             
             // Démarrer le compte à rebours
@@ -873,55 +1104,161 @@
             }, 1000);
         }
 
-        function stopCountdown() {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-        }
-
         function goToHomePage() {
             // Arrêter le compte à rebours
             stopCountdown();
             
-            // Nettoyer le localStorage si nécessaire
-            localStorage.removeItem('paymentStartTime');
-            localStorage.removeItem('paymentCompleted');
-            
-            // Rediriger vers VOTRE page d'accueil
+            // Rediriger vers la boutique
             window.location.href = HOME_PAGE_URL;
         }
 
-        function generateWhatsAppMessage() {
-            const formationName = FORMATION_NAMES[paymentData.formation] || paymentData.formation;
-            const currentDate = new Date().toLocaleDateString('fr-FR');
-            const currentTime = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        function generateReference() {
+            const date = new Date();
+            const year = date.getFullYear().toString().slice(-2);
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
             
-            let message = `✅ *CONFIRMATION DE PAIEMENT FORMATION* ✅\n\n`;
+            return `BP${year}${month}${day}${random}`;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function savePaymentToHistory() {
+            // Récupérer l'historique existant
+            let history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
             
-            message += `📋 *INFORMATIONS DU CLIENT:*\n`;
-            message += `👤 *Nom:* ${paymentData.clientName}\n`;
-            message += `📱 *Téléphone:* ${paymentData.clientPhone}\n`;
-            if (paymentData.clientEmail) {
-                message += `📧 *Email:* ${paymentData.clientEmail}\n`;
+            // Ajouter le nouveau paiement
+            history.unshift({
+                ...paymentData,
+                confirmationSent: new Date().toISOString(),
+                whatsappSent: true,
+                whatsappNumber: WHATSAPP_NUMBER
+            });
+            
+            // Limiter à 50 entrées maximum
+            if (history.length > 50) {
+                history = history.slice(0, 50);
             }
             
-            message += `\n🎓 *FORMATION CHOISIE:*\n`;
-            message += `📚 *Type:* ${formationName}\n`;
-            message += `💰 *Montant payé:* ${paymentData.amount}€\n`;
-            message += `💳 *Méthode:* ${paymentData.paymentMethod}\n`;
+            // Sauvegarder
+            localStorage.setItem('paymentHistory', JSON.stringify(history));
             
-            message += `\n📝 *DÉTAILS TECHNIQUES:*\n`;
-            message += `🔢 *Référence:* ${paymentData.reference}\n`;
-            message += `📅 *Date:* ${currentDate}\n`;
-            message += `⏰ *Heure:* ${currentTime}\n`;
+            // Effacer le paiement courant
+            localStorage.removeItem('currentPayment');
             
-            message += `\n🔄 *STATUT:* PAIEMENT EFFECTUÉ ET CONFIRMÉ\n\n`;
-            message += `Merci de valider cette inscription et d'envoyer les accès formation à ce client.\n`;
-            message += `Formation: ${formationName}\n`;
-            message += `Montant reçu: ${paymentData.amount}€\n\n`;
-            message += `_Message généré automatiquement depuis la page de paiement_`;
+            return history;
+        }
+
+        function loadPaymentHistory() {
+            const historySection = document.getElementById('history-section');
+            const history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
             
-            return message;
+            if (history.length === 0) {
+                historySection.innerHTML = `
+                    <div class="no-history">
+                        <i class="fas fa-history"></i>
+                        <p>Aucun paiement enregistré</p>
+                        <p style="font-size: 12px; margin-top: 10px; color: #888;">
+                            Vos paiements apparaîtront ici après confirmation
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Trier par date (plus récent d'abord)
+            history.sort((a, b) => new Date(b.timestamp || b.confirmationSent) - new Date(a.timestamp || a.confirmationSent));
+            
+            let historyHTML = '';
+            
+            history.forEach((payment, index) => {
+                const formationName = FORMATION_NAMES[payment.formation] || payment.formation;
+                const dateFormatted = formatDate(payment.confirmationSent || payment.timestamp || Date.now());
+                const statusClass = payment.status === 'completed' ? 'status-completed' : 'status-pending';
+                const statusText = payment.status === 'completed' ? 'Confirmé' : 'En attente';
+                
+                historyHTML += `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="history-reference">${payment.reference || 'N/A'}</span>
+                            <span class="history-date">${dateFormatted}</span>
+                        </div>
+                        <div class="history-details">
+                            <div class="history-detail-item">
+                                <span class="history-label">Client:</span>
+                                <span class="history-value">${payment.clientName || 'Non spécifié'}</span>
+                            </div>
+                            <div class="history-detail-item">
+                                <span class="history-label">Formation:</span>
+                                <span class="history-value">${formationName}</span>
+                            </div>
+                            <div class="history-detail-item">
+                                <span class="history-label">Téléphone:</span>
+                                <span class="history-value">${payment.clientPhone || 'Non spécifié'}</span>
+                            </div>
+                            <div class="history-amount">
+                                ${payment.amount || 0}€
+                            </div>
+                            <div class="history-status ${statusClass}">
+                                ${statusText}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            historySection.innerHTML = historyHTML;
+        }
+
+        function resetPaymentForm() {
+            // Réinitialiser les données
+            paymentData = {
+                amount: 299,
+                formation: 'maquillage',
+                reference: generateReference(),
+                date: new Date().toISOString().split('T')[0],
+                clientName: '',
+                clientPhone: '',
+                clientEmail: '',
+                paymentMethod: 'PayPal',
+                status: 'pending',
+                timestamp: Date.now()
+            };
+            
+            // Réinitialiser le formulaire
+            document.getElementById('client-name').value = '';
+            document.getElementById('client-phone').value = '';
+            document.getElementById('client-email').value = '';
+            document.getElementById('client-formation').value = 'maquillage';
+            
+            // Réafficher les sections masquées
+            document.getElementById('paypal-btn').style.display = 'inline-flex';
+            document.getElementById('instructions').style.display = 'block';
+            document.querySelector('.amount-display').style.display = 'block';
+            
+            // Masquer les autres sections
+            document.getElementById('client-form').classList.remove('active');
+            document.getElementById('client-form').style.display = 'none';
+            document.getElementById('confirmation-info').classList.remove('active');
+            document.getElementById('confirmation-info').style.display = 'none';
+            document.getElementById('success-section').classList.remove('active');
+            document.getElementById('success-section').style.display = 'none';
+            
+            // Mettre à jour l'affichage
+            updateAmountDisplay();
+            
+            // Notification
+            showNotification("Prêt pour un nouveau paiement", "info");
         }
 
         function validateForm() {
@@ -965,24 +1302,7 @@
             paymentData.clientEmail = document.getElementById('client-email').value.trim();
             paymentData.formation = document.getElementById('client-formation').value;
             paymentData.amount = FORMATION_PRICES[paymentData.formation] || 299;
-            
-            // Mettre à jour la référence si nécessaire
-            if (!paymentData.reference) {
-                paymentData.reference = generateReference();
-            }
-            
-            // Sauvegarder
-            savePaymentData();
-        }
-
-        function generateReference() {
-            const date = new Date();
-            const year = date.getFullYear().toString().slice(-2);
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const day = date.getDate().toString().padStart(2, '0');
-            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-            
-            return `BP${year}${month}${day}${random}`;
+            paymentData.timestamp = Date.now();
         }
 
         function saveFormData() {
@@ -1008,61 +1328,52 @@
                 updateFormationDetails(savedForm.formation);
             }
             
-            // Charger les données de paiement précédentes
-            const savedPayment = JSON.parse(localStorage.getItem('lastPaymentData') || '{}');
-            if (savedPayment.reference) {
-                paymentData.reference = savedPayment.reference;
-            }
-            
-            // Vérifier si un paiement était en cours
-            const paymentStarted = localStorage.getItem('paymentStartTime');
-            const paymentCompleted = localStorage.getItem('paymentCompleted');
-            
-            if (paymentStarted && !paymentCompleted) {
-                // Paiement en cours, afficher le formulaire
+            // Charger le paiement courant s'il existe
+            const currentPayment = JSON.parse(localStorage.getItem('currentPayment') || '{}');
+            if (currentPayment.reference && currentPayment.status === 'pending') {
+                paymentData = { ...paymentData, ...currentPayment };
                 setTimeout(() => {
                     showConfirmationSection();
                 }, 500);
             }
-            
-            // Vérifier si une confirmation a déjà été envoyée
-            const confirmationSent = localStorage.getItem('confirmationAlreadySent');
-            if (confirmationSent === 'true') {
-                // Afficher directement la section succès
-                setTimeout(() => {
-                    showSuccessSection();
-                    startCountdown();
-                }, 500);
-            }
-        }
-
-        function savePaymentData() {
-            localStorage.setItem('lastPaymentData', JSON.stringify(paymentData));
-            
-            // Ajouter à l'historique
-            let history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
-            history.unshift({
-                ...paymentData,
-                confirmationSent: new Date().toISOString()
-            });
-            if (history.length > 20) history = history.slice(0, 20);
-            localStorage.setItem('paymentHistory', JSON.stringify(history));
         }
 
         function saveConfirmationSent() {
-            const confirmation = {
-                ...paymentData,
-                whatsappSent: new Date().toISOString(),
-                whatsappNumber: WHATSAPP_NUMBER
-            };
-            
-            localStorage.setItem('lastConfirmationSent', JSON.stringify(confirmation));
-            localStorage.setItem('confirmationAlreadySent', 'true');
-            
             // Compter les confirmations
             let confirmations = parseInt(localStorage.getItem('totalConfirmationsSent') || '0');
             confirmations++;
             localStorage.setItem('totalConfirmationsSent', confirmations.toString());
+        }
+
+        function generateWhatsAppMessage() {
+            const formationName = FORMATION_NAMES[paymentData.formation] || paymentData.formation;
+            const currentDate = new Date().toLocaleDateString('fr-FR');
+            const currentTime = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+            
+            let message = `✅ *NOUVELLE CONFIRMATION DE PAIEMENT* ✅\n\n`;
+            
+            message += `📋 *INFORMATIONS DU CLIENT:*\n`;
+            message += `👤 *Nom:* ${paymentData.clientName}\n`;
+            message += `📱 *Téléphone:* ${paymentData.clientPhone}\n`;
+            if (paymentData.clientEmail) {
+                message += `📧 *Email:* ${paymentData.clientEmail}\n`;
+            }
+            
+            message += `\n🎓 *FORMATION CHOISIE:*\n`;
+            message += `📚 *Type:* ${formationName}\n`;
+            message += `💰 *Montant payé:* ${paymentData.amount}€\n`;
+            message += `💳 *Méthode:* ${paymentData.paymentMethod}\n`;
+            
+            message += `\n📝 *DÉTAILS TECHNIQUES:*\n`;
+            message += `🔢 *Référence:* ${paymentData.reference}\n`;
+            message += `📅 *Date:* ${currentDate}\n`;
+            message += `⏰ *Heure:* ${currentTime}\n`;
+            
+            message += `\n🔄 *STATUT:* PAIEMENT EFFECTUÉ ET CONFIRMÉ\n\n`;
+            message += `Merci de valider cette inscription et d'envoyer les accès formation.\n\n`;
+            message += `_Message généré automatiquement depuis la gestion des paiements_`;
+            
+            return message;
         }
 
         function showNotification(message, type) {
