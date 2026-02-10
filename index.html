@@ -46,7 +46,7 @@
         
         .payment-container {
             width: 100%;
-            max-width: 380px;
+            max-width: 420px;
             background: white;
             border-radius: 16px;
             overflow: hidden;
@@ -64,7 +64,7 @@
         .payment-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 18px 16px;
+            padding: 20px 16px;
             text-align: center;
             position: relative;
             border-bottom: 2px solid rgba(255, 255, 255, 0.15);
@@ -79,17 +79,17 @@
         }
         
         .payment-title h1 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: 0.3px;
         }
         
         .payment-title i {
-            font-size: 20px;
+            font-size: 22px;
         }
         
         .payment-subtitle {
-            font-size: 12px;
+            font-size: 13px;
             opacity: 0.9;
             font-weight: 400;
         }
@@ -99,7 +99,7 @@
             display: flex;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            margin: 10px 0;
+            margin: 12px 0 0;
             overflow: hidden;
         }
         
@@ -131,16 +131,16 @@
         /* Bouton Retour */
         .payment-retour {
             position: absolute;
-            top: 14px;
-            left: 14px;
-            width: 32px;
-            height: 32px;
+            top: 16px;
+            left: 16px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.15);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.25);
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
             transition: var(--transition);
             display: flex;
             align-items: center;
@@ -155,7 +155,7 @@
         
         /* Content */
         .payment-content {
-            padding: 20px 16px;
+            padding: 22px 18px;
         }
         
         /* Onglet Content */
@@ -176,13 +176,13 @@
         /* Message principal */
         .main-message {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
         
         .message-text {
             font-size: 14px;
             color: #666;
-            line-height: 1.4;
+            line-height: 1.5;
             margin-bottom: 15px;
         }
         
@@ -196,239 +196,38 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
+            gap: 10px;
+            padding: 14px 28px;
             background: linear-gradient(135deg, var(--paypal), var(--paypal-light));
             color: white;
             border: none;
             border-radius: var(--border-radius-round);
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--box-shadow);
-            max-width: 240px;
+            max-width: 260px;
             width: 100%;
         }
         
         .paypal-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--box-shadow-hover);
             background: linear-gradient(135deg, #002f83, #0088cc);
         }
         
         .paypal-btn i {
-            font-size: 16px;
+            font-size: 18px;
         }
         
-        /* Nouveau paiement */
-        .new-payment-btn {
+        /* Boutons généraux */
+        .action-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             padding: 12px 24px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: var(--border-radius-round);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
-            max-width: 240px;
-            width: 100%;
-            margin-top: 15px;
-        }
-        
-        .new-payment-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--box-shadow-hover);
-            background: linear-gradient(135deg, var(--primary-dark), #6a1b9a);
-        }
-        
-        /* Historique des paiements */
-        .history-section {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 5px;
-            margin-top: 15px;
-        }
-        
-        .history-item {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border: 1px solid #e0e0e0;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-        
-        .history-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--box-shadow-hover);
-            border-color: var(--primary-light);
-        }
-        
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed #e0e0e0;
-        }
-        
-        .history-reference {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            background: var(--light-pink);
-            padding: 3px 8px;
-            border-radius: 20px;
-        }
-        
-        .history-date {
-            font-size: 11px;
-            color: #666;
-        }
-        
-        .history-details {
-            font-size: 13px;
-            color: #444;
-            line-height: 1.5;
-        }
-        
-        .history-detail-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        
-        .history-label {
-            font-weight: 600;
-            color: var(--secondary);
-        }
-        
-        .history-value {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .history-amount {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--success);
-            text-align: right;
-            margin-top: 8px;
-        }
-        
-        .history-status {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 8px;
-        }
-        
-        .status-completed {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .status-pending {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-        
-        /* Aucun historique */
-        .no-history {
-            text-align: center;
-            padding: 30px 20px;
-            color: #666;
-        }
-        
-        .no-history i {
-            font-size: 40px;
-            color: #ddd;
-            margin-bottom: 15px;
-        }
-        
-        .no-history p {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
-        /* Formulaire client */
-        .client-form {
-            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
-            padding: 16px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 1px solid #ba68c8;
-        }
-        
-        .form-title {
-            color: var(--secondary);
-            margin-bottom: 12px;
-            font-size: 14px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .form-group {
-            margin-bottom: 12px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 12px;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d1c4e9;
-            border-radius: 8px;
-            font-size: 13px;
-            transition: var(--transition);
-            background: white;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.1);
-        }
-        
-        .form-select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d1c4e9;
-            border-radius: 8px;
-            font-size: 13px;
-            background: white;
-            cursor: pointer;
-        }
-        
-        /* Bouton WhatsApp */
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, var(--whatsapp), #128C7E);
-            color: white;
             border: none;
             border-radius: var(--border-radius-round);
             font-size: 14px;
@@ -441,126 +240,269 @@
             margin-top: 10px;
         }
         
+        /* Formulaire client */
+        .client-form {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 18px 0;
+            border: 2px solid #ba68c8;
+            box-shadow: 0 4px 12px rgba(186, 104, 200, 0.1);
+        }
+        
+        .form-title {
+            color: var(--secondary);
+            margin-bottom: 16px;
+            font-size: 16px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1c4e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: var(--transition);
+            background: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1c4e9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        /* Section Montant */
+        .amount-display {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 16px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border: 2px solid #81c784;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(129, 199, 132, 0.1);
+        }
+        
+        .amount-label {
+            font-size: 12px;
+            color: #2e7d32;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 600;
+        }
+        
+        .amount-value {
+            font-size: 24px;
+            color: var(--success);
+            font-weight: 900;
+        }
+        
+        /* Section vérification */
+        .verification-section {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 18px 0;
+            border: 2px solid #ffb74d;
+            box-shadow: 0 4px 12px rgba(255, 183, 77, 0.1);
+            display: none;
+        }
+        
+        .verification-section.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .verification-title {
+            color: #f57c00;
+            margin-bottom: 12px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .verification-content {
+            font-size: 13px;
+            color: #e65100;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .verification-details {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border: 1px solid #ffcc80;
+        }
+        
+        .verification-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ffe0b2;
+        }
+        
+        .verification-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .verification-label {
+            font-weight: 600;
+            color: #f57c00;
+            font-size: 13px;
+        }
+        
+        .verification-value {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+            text-align: right;
+        }
+        
+        /* Bouton WhatsApp */
+        .whatsapp-btn {
+            background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+            color: white;
+        }
+        
         .whatsapp-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--box-shadow-hover);
             background: linear-gradient(135deg, #1ebe5d, #0d8c6e);
         }
         
-        /* Section de confirmation */
-        .confirmation-info {
-            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-            padding: 16px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 1px solid #ffb74d;
-            text-align: center;
-        }
-        
-        .confirmation-title {
-            color: #f57c00;
-            margin-bottom: 10px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .confirmation-content {
-            font-size: 12px;
-            color: #e65100;
-            line-height: 1.4;
-            margin-bottom: 15px;
-        }
-        
-        /* Section finale après envoi */
+        /* Section succès */
         .success-section {
             background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 2px solid #4caf50;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 18px 0;
+            border: 3px solid #4caf50;
             text-align: center;
+            display: none;
+        }
+        
+        .success-section.active {
+            display: block;
+            animation: popIn 0.5s ease;
+        }
+        
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
         }
         
         .success-icon {
-            font-size: 40px;
+            font-size: 48px;
             color: var(--success);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             animation: bounce 1s ease;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
         
         .success-title {
             color: var(--success);
-            margin-bottom: 10px;
-            font-size: 16px;
-            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: 800;
         }
         
         .success-message {
-            font-size: 13px;
+            font-size: 14px;
             color: #2e7d32;
-            line-height: 1.4;
-            margin-bottom: 20px;
+            line-height: 1.5;
+            margin-bottom: 24px;
         }
         
-        /* Montant */
-        .amount-display {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            padding: 14px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid #81c784;
-            text-align: center;
+        .new-payment-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
         
-        .amount-label {
-            font-size: 11px;
-            color: #2e7d32;
-            margin-bottom: 5px;
-            display: block;
-        }
-        
-        .amount-value {
-            font-size: 22px;
-            color: var(--success);
-            font-weight: 800;
+        .new-payment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+            background: linear-gradient(135deg, var(--primary-dark), #6a1b9a);
         }
         
         /* Instructions */
         .instructions {
-            font-size: 11px;
+            font-size: 12px;
             color: #666;
             text-align: center;
-            margin-top: 15px;
-            line-height: 1.4;
+            margin-top: 18px;
+            line-height: 1.5;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
         }
         
         /* Filtres Historique */
         .history-filters {
             display: flex;
             gap: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
             justify-content: center;
         }
         
         .filter-btn {
-            padding: 6px 12px;
+            padding: 8px 14px;
             background: #f5f5f5;
             border: 1px solid #ddd;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: #666;
             cursor: pointer;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .filter-btn.active {
@@ -574,61 +516,198 @@
             border-color: #ccc;
         }
         
+        /* Historique des paiements */
+        .history-section {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-top: 18px;
+        }
+        
+        .history-item {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid #e0e0e0;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .history-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--primary-light);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #e0e0e0;
+        }
+        
+        .history-reference {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            background: var(--light-pink);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        
+        .history-date {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .history-details {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        .history-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px dotted #eee;
+        }
+        
+        .history-detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .history-label {
+            font-weight: 700;
+            color: var(--secondary);
+            min-width: 80px;
+        }
+        
+        .history-value {
+            font-weight: 600;
+            color: #333;
+            text-align: right;
+            flex: 1;
+        }
+        
+        .history-amount {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--success);
+            text-align: right;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 2px solid #e8f5e9;
+        }
+        
+        .history-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status-pending {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 1px solid #ffe0b2;
+        }
+        
+        /* Aucun historique */
+        .no-history {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .no-history i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .no-history p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
         /* Stats Historique */
         .history-stats {
             background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #90caf9;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #90caf9;
             text-align: center;
         }
         
         .stats-title {
             color: #1565c0;
-            margin-bottom: 8px;
-            font-size: 13px;
-            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .stats-content {
             display: flex;
             justify-content: space-around;
-            font-size: 11px;
+            font-size: 12px;
         }
         
         .stat-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-width: 70px;
         }
         
         .stat-value {
-            font-weight: 800;
+            font-weight: 900;
             color: var(--primary);
-            font-size: 14px;
+            font-size: 16px;
         }
         
         .stat-label {
             color: #666;
-            margin-top: 2px;
+            margin-top: 4px;
+            font-size: 11px;
+            text-align: center;
         }
         
         /* Loader */
         .loader {
             display: none;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .loader-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--primary);
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+            margin: 0 auto 15px;
         }
         
         @keyframes spin {
@@ -637,30 +716,31 @@
         }
         
         .loader-text {
-            font-size: 12px;
+            font-size: 13px;
             color: #666;
+            font-weight: 600;
         }
         
         /* Footer */
         .payment-footer {
             text-align: center;
-            padding: 14px;
+            padding: 16px;
             background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
             color: white;
-            font-size: 10px;
+            font-size: 11px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .footer-logo {
-            font-size: 16px;
-            margin-bottom: 6px;
+            font-size: 18px;
+            margin-bottom: 8px;
             color: #f48fb1;
         }
         
         /* Version mobile */
         @media (max-width: 480px) {
             body {
-                padding: 12px;
+                padding: 10px;
             }
             
             .payment-container {
@@ -673,14 +753,20 @@
             }
             
             .payment-title h1 {
-                font-size: 16px;
+                font-size: 18px;
             }
             
             .payment-content {
                 padding: 18px 14px;
             }
             
-            .paypal-btn, .whatsapp-btn, .new-payment-btn {
+            .paypal-btn {
+                padding: 12px 22px;
+                font-size: 14px;
+                max-width: 240px;
+            }
+            
+            .action-btn {
                 padding: 11px 20px;
                 font-size: 13px;
                 max-width: 220px;
@@ -689,18 +775,17 @@
             .payment-retour {
                 top: 12px;
                 left: 12px;
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
+                width: 32px;
+                height: 32px;
+                font-size: 13px;
+            }
+            
+            .client-form, .verification-section, .success-section {
+                padding: 16px;
             }
             
             .history-item {
-                padding: 12px;
-            }
-            
-            .tab-btn {
-                font-size: 11px;
-                padding: 8px;
+                padding: 14px;
             }
             
             .history-filters {
@@ -708,24 +793,34 @@
             }
             
             .filter-btn {
-                padding: 5px 10px;
-                font-size: 10px;
+                padding: 6px 12px;
+                font-size: 11px;
             }
         }
         
         @media (max-width: 360px) {
-            .paypal-btn, .whatsapp-btn, .new-payment-btn {
+            .paypal-btn {
+                padding: 11px 20px;
+                font-size: 13px;
+                max-width: 220px;
+            }
+            
+            .action-btn {
                 padding: 10px 18px;
                 font-size: 12px;
                 max-width: 200px;
             }
             
             .payment-title h1 {
-                font-size: 15px;
+                font-size: 17px;
             }
             
             .payment-subtitle {
-                font-size: 11px;
+                font-size: 12px;
+            }
+            
+            .form-title, .verification-title, .success-title {
+                font-size: 15px;
             }
         }
     </style>
@@ -741,15 +836,15 @@
         <header class="payment-header">
             <div class="payment-title">
                 <i class="fas fa-credit-card"></i>
-                <h1>Gestion Paiements</h1>
+                <h1>Paiement Formation</h1>
             </div>
-            <p class="payment-subtitle">Formations Beauté Pro</p>
+            <p class="payment-subtitle">Beauté Pro - Système Automatisé</p>
             
             <!-- Menu Onglets -->
             <div class="tabs-menu">
                 <button class="tab-btn active" data-tab="payment">
                     <i class="fas fa-plus-circle"></i>
-                    Nouveau
+                    Nouveau Paiement
                 </button>
                 <button class="tab-btn" data-tab="history">
                     <i class="fas fa-history"></i>
@@ -765,47 +860,50 @@
                 <!-- Message principal -->
                 <div class="main-message">
                     <p class="message-text">
-                        Complétez le formulaire puis effectuez votre paiement.<br>
-                        La confirmation sera envoyée automatiquement.
+                        Remplissez le formulaire ci-dessous pour effectuer un nouveau paiement.<br>
+                        Après paiement PayPal, la confirmation sera envoyée automatiquement.
                     </p>
                 </div>
                 
-                <!-- Formulaire client AVANT paiement -->
+                <!-- Formulaire client -->
                 <div class="client-form" id="client-form">
                     <h3 class="form-title">
-                        <i class="fas fa-user"></i>
-                        Informations client
+                        <i class="fas fa-user-edit"></i>
+                        Informations du client
                     </h3>
                     
                     <div class="form-group">
                         <label for="client-name" class="form-label">Nom complet *</label>
-                        <input type="text" id="client-name" class="form-input" placeholder="Votre nom et prénom" required>
+                        <input type="text" id="client-name" class="form-input" 
+                               placeholder="Prénom et Nom" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="client-phone" class="form-label">Téléphone *</label>
-                        <input type="tel" id="client-phone" class="form-input" placeholder="Votre numéro" required>
+                        <input type="tel" id="client-phone" class="form-input" 
+                               placeholder="Ex: 0612345678" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="client-email" class="form-label">Email</label>
-                        <input type="email" id="client-email" class="form-input" placeholder="Votre email">
+                        <label for="client-email" class="form-label">Email (optionnel)</label>
+                        <input type="email" id="client-email" class="form-input" 
+                               placeholder="votre@email.com">
                     </div>
                     
                     <div class="form-group">
                         <label for="client-formation" class="form-label">Formation choisie *</label>
                         <select id="client-formation" class="form-select" required>
-                            <option value="">Sélectionnez</option>
-                            <option value="maquillage">Maquillage Professionnel (299€)</option>
-                            <option value="ongles">Ongles Gel Complet (349€)</option>
-                            <option value="effets">Effets Spéciaux (399€)</option>
-                            <option value="combinee">Formation Combinée (599€)</option>
+                            <option value="">Sélectionnez une formation</option>
+                            <option value="maquillage">🎨 Maquillage Professionnel (299€)</option>
+                            <option value="ongles">💅 Ongles Gel Complet (349€)</option>
+                            <option value="effets">🎭 Effets Spéciaux (399€)</option>
+                            <option value="combinee">👑 Formation Combinée (599€)</option>
                         </select>
                     </div>
                     
-                    <!-- Section Montant dynamique -->
+                    <!-- Montant dynamique -->
                     <div class="amount-display">
-                        <span class="amount-label">Montant à payer :</span>
+                        <span class="amount-label">Montant total à régler :</span>
                         <div class="amount-value" id="amount-value">299€</div>
                     </div>
                     
@@ -818,45 +916,96 @@
                     </div>
                 </div>
                 
-                <!-- Loader pendant le traitement -->
+                <!-- Loader -->
                 <div class="loader" id="loader">
                     <div class="loader-spinner"></div>
-                    <p class="loader-text">Traitement en cours...</p>
+                    <p class="loader-text">Redirection vers PayPal...</p>
                 </div>
                 
-                <!-- Section de confirmation -->
-                <div class="confirmation-info" id="confirmation-info" style="display: none;">
-                    <h3 class="confirmation-title">
+                <!-- Section vérification après paiement -->
+                <div class="verification-section" id="verification-section">
+                    <h3 class="verification-title">
                         <i class="fas fa-check-circle"></i>
-                        Paiement en cours
+                        Vérification du paiement
                     </h3>
-                    <p class="confirmation-content">
-                        Redirection vers PayPal...<br>
-                        Revenez sur cette page après paiement.
+                    
+                    <p class="verification-content">
+                        ✅ Paiement PayPal effectué avec succès !<br>
+                        Vérifiez les informations ci-dessous avant confirmation.
+                    </p>
+                    
+                    <div class="verification-details">
+                        <div class="verification-item">
+                            <span class="verification-label">Nom :</span>
+                            <span class="verification-value" id="verify-name"></span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="verification-label">Téléphone :</span>
+                            <span class="verification-value" id="verify-phone"></span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="verification-label">Formation :</span>
+                            <span class="verification-value" id="verify-formation"></span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="verification-label">Montant :</span>
+                            <span class="verification-value" id="verify-amount"></span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="verification-label">Référence :</span>
+                            <span class="verification-value" id="verify-reference"></span>
+                        </div>
+                        <div class="verification-item">
+                            <span class="verification-label">Date :</span>
+                            <span class="verification-value" id="verify-date"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="paypal-btn-container">
+                        <button class="action-btn whatsapp-btn" id="whatsapp-confirm-btn">
+                            <i class="fab fa-whatsapp"></i>
+                            Confirmer & Envoyer par WhatsApp
+                        </button>
+                    </div>
+                    
+                    <p style="font-size: 11px; color: #666; text-align: center; margin-top: 15px;">
+                        <i class="fas fa-shield-alt"></i> La confirmation sera envoyée au +33756950190
                     </p>
                 </div>
                 
                 <!-- Section succès -->
-                <div class="success-section" id="success-section" style="display: none;">
+                <div class="success-section" id="success-section">
                     <div class="success-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <h3 class="success-title">Paiement Confirmé !</h3>
                     <p class="success-message">
-                        Votre paiement a été enregistré avec succès.<br>
-                        La confirmation a été envoyée automatiquement.
+                        ✅ Votre paiement a été enregistré avec succès.<br>
+                        📱 La confirmation a été envoyée par WhatsApp.<br>
+                        📊 Le paiement est maintenant dans votre historique.
                     </p>
                     
                     <div class="paypal-btn-container">
-                        <button class="new-payment-btn" id="new-payment-after-success">
+                        <button class="action-btn new-payment-btn" id="new-payment-btn">
                             <i class="fas fa-plus-circle"></i>
                             Nouveau Paiement
                         </button>
                     </div>
                     
-                    <p style="font-size: 11px; color: #666; margin-top: 15px;">
-                        <i class="fas fa-history"></i> Voir l'<a href="#" onclick="switchTab('history'); return false;" style="color: var(--primary); font-weight: 600;">historique</a>
+                    <p style="font-size: 12px; color: #666; margin-top: 20px;">
+                        <i class="fas fa-history"></i> 
+                        <a href="#" onclick="switchTab('history'); return false;" 
+                           style="color: var(--primary); font-weight: 700; text-decoration: none;">
+                            Voir l'historique des paiements
+                        </a>
                     </p>
+                </div>
+                
+                <!-- Instructions -->
+                <div class="instructions" id="instructions">
+                    <i class="fas fa-info-circle"></i> 
+                    <strong>Processus :</strong> 1. Remplir formulaire → 2. Payer sur PayPal → 
+                    3. Vérification automatique → 4. Envoi WhatsApp → 5. Sauvegarde historique
                 </div>
             </div>
             
@@ -864,54 +1013,49 @@
             <div class="tab-content" id="history-tab">
                 <div class="main-message">
                     <p class="message-text">
-                        Historique de vos paiements<br>
-                        et confirmations envoyées.
+                        📊 Historique complet de tous vos paiements<br>
+                        🔍 Filtrez par période pour une analyse détaillée
                     </p>
                 </div>
                 
                 <!-- Statistiques -->
                 <div class="history-stats" id="history-stats">
                     <div class="stats-title">
-                        <i class="fas fa-chart-bar"></i>
-                        Statistiques du jour
+                        <i class="fas fa-chart-line"></i>
+                        Statistiques des paiements
                     </div>
                     <div class="stats-content" id="stats-content">
                         <!-- Les stats seront ajoutées par JavaScript -->
                     </div>
                 </div>
                 
-                <!-- Filtres Historique -->
+                <!-- Filtres -->
                 <div class="history-filters">
                     <button class="filter-btn active" data-filter="today">
-                        <i class="fas fa-calendar-day"></i>
-                        Aujourd'hui
+                        <i class="fas fa-calendar-day"></i> Aujourd'hui
                     </button>
                     <button class="filter-btn" data-filter="yesterday">
-                        <i class="fas fa-calendar-alt"></i>
-                        Hier
+                        <i class="fas fa-calendar-alt"></i> Hier
                     </button>
                     <button class="filter-btn" data-filter="week">
-                        <i class="fas fa-calendar-week"></i>
-                        7 jours
+                        <i class="fas fa-calendar-week"></i> 7 jours
                     </button>
                     <button class="filter-btn" data-filter="month">
-                        <i class="fas fa-calendar"></i>
-                        30 jours
+                        <i class="fas fa-calendar"></i> 30 jours
                     </button>
                     <button class="filter-btn" data-filter="all">
-                        <i class="fas fa-list"></i>
-                        Tout
+                        <i class="fas fa-list"></i> Tout
                     </button>
                 </div>
                 
-                <!-- Historique des paiements -->
+                <!-- Historique -->
                 <div class="history-section" id="history-section">
                     <!-- Les paiements seront chargés ici par JavaScript -->
                 </div>
                 
-                <!-- Bouton nouveau paiement depuis l'historique -->
-                <div class="paypal-btn-container" style="margin-top: 20px;">
-                    <button class="new-payment-btn" id="new-payment-from-history">
+                <!-- Bouton nouveau paiement -->
+                <div class="paypal-btn-container" style="margin-top: 25px;">
+                    <button class="action-btn new-payment-btn" id="new-payment-from-history">
                         <i class="fas fa-plus-circle"></i>
                         Nouveau Paiement
                     </button>
@@ -924,9 +1068,9 @@
             <div class="footer-logo">
                 <i class="fas fa-spa"></i>
             </div>
-            <p>© 2026 Beauté Pro</p>
-            <p style="margin-top: 4px; font-size: 9px; opacity: 0.9;">
-                Gestion des paiements
+            <p>© 2026 Beauté Pro - Formations Expertise</p>
+            <p style="margin-top: 6px; font-size: 10px; opacity: 0.9;">
+                Système automatisé de gestion des paiements
             </p>
         </footer>
     </div>
@@ -980,11 +1124,9 @@
         });
 
         function initializePage() {
-            // Mettre à jour le montant affiché
             updateAmountDisplay();
-            
-            // Mettre à jour la référence
             paymentData.reference = generateReference();
+            checkForPendingPayment();
         }
 
         function setupEventListeners() {
@@ -1009,14 +1151,20 @@
                 updateFormationDetails(this.value);
             });
             
+            // Bouton confirmation WhatsApp
+            document.getElementById('whatsapp-confirm-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                sendWhatsAppConfirmation();
+            });
+            
             // Bouton nouveau paiement après succès
-            document.getElementById('new-payment-after-success').addEventListener('click', function() {
-                resetPaymentForm();
+            document.getElementById('new-payment-btn').addEventListener('click', function() {
+                resetPaymentProcess();
             });
             
             // Bouton nouveau paiement depuis historique
             document.getElementById('new-payment-from-history').addEventListener('click', function() {
-                resetPaymentForm();
+                resetPaymentProcess();
                 switchTab('payment');
             });
             
@@ -1039,17 +1187,24 @@
             if (formationId && FORMATION_PRICES[formationId]) {
                 paymentData.formation = formationId;
                 paymentData.amount = FORMATION_PRICES[formationId];
-                
-                // Mettre à jour l'affichage du montant
                 updateAmountDisplay();
-                
-                // Sauvegarder
                 saveFormData();
             }
         }
 
+        function checkForPendingPayment() {
+            const currentPayment = JSON.parse(localStorage.getItem('currentPayment') || '{}');
+            if (currentPayment.reference && currentPayment.status === 'pending') {
+                paymentData = { ...paymentData, ...currentPayment };
+                isProcessingPayment = true;
+                showNotification("Paiement en attente de vérification", "info");
+                setTimeout(() => {
+                    showVerificationSection();
+                }, 500);
+            }
+        }
+
         function switchTab(tabId) {
-            // Désactiver tous les onglets
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
@@ -1058,11 +1213,9 @@
                 content.classList.remove('active');
             });
             
-            // Activer l'onglet sélectionné
             document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
             document.getElementById(`${tabId}-tab`).classList.add('active');
             
-            // Recharger l'historique si on passe sur cet onglet
             if (tabId === 'history') {
                 loadPaymentHistory();
                 updateStats();
@@ -1070,20 +1223,17 @@
         }
 
         function setHistoryFilter(filter) {
-            // Mettre à jour le filtre actif
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
             document.querySelector(`.filter-btn[data-filter="${filter}"]`).classList.add('active');
-            
             currentFilter = filter;
             loadPaymentHistory();
             updateStats();
         }
 
         function startPaymentProcess() {
-            // Valider le formulaire
             if (!validateForm()) {
                 showNotification("Veuillez remplir tous les champs obligatoires", "error");
                 return;
@@ -1094,35 +1244,25 @@
                 return;
             }
             
-            // Récupérer les données du formulaire
             collectFormData();
-            
-            // Afficher le loader
             document.getElementById('loader').style.display = 'block';
-            document.getElementById('confirmation-info').style.display = 'block';
-            document.getElementById('paypal-btn').style.display = 'none';
+            document.getElementById('client-form').style.display = 'none';
+            document.getElementById('instructions').style.display = 'none';
             
-            // Marquer comme en cours de traitement
             isProcessingPayment = true;
-            
-            // Enregistrer le début du paiement
             paymentData.paymentStartTime = Date.now();
             paymentData.reference = generateReference();
             paymentData.status = 'pending';
             paymentData.date = new Date().toISOString().split('T')[0];
             
-            // Créer une copie propre des données
             const paymentToSave = {
                 ...paymentData,
                 timestamp: Date.now()
             };
             
             localStorage.setItem('currentPayment', JSON.stringify(paymentToSave));
-            
-            // Afficher notification
             showNotification("Redirection vers PayPal...", "info");
             
-            // Ouvrir PayPal dans un nouvel onglet
             setTimeout(() => {
                 paypalWindow = window.open(PAYPAL_ME_LINK, '_blank', 'noopener,noreferrer');
                 
@@ -1132,10 +1272,9 @@
                     return;
                 }
                 
-                // Détecter le retour de PayPal
                 startPaypalMonitoring();
                 
-            }, 1000);
+            }, 1500);
         }
 
         function collectFormData() {
@@ -1148,17 +1287,13 @@
         }
 
         function startPaypalMonitoring() {
-            // Vérifier périodiquement si la fenêtre PayPal est fermée
             checkPaypalInterval = setInterval(() => {
                 if (paypalWindow && paypalWindow.closed) {
                     clearInterval(checkPaypalInterval);
-                    
-                    // L'utilisateur est revenu de PayPal
                     handlePaypalReturn();
                 }
             }, 1000);
             
-            // Arrêter de vérifier après 10 minutes
             setTimeout(() => {
                 if (checkPaypalInterval) {
                     clearInterval(checkPaypalInterval);
@@ -1171,65 +1306,83 @@
         }
 
         function handlePaypalReturn() {
-            // Mettre à jour les données de paiement
             paymentData.paymentCompleted = true;
             paymentData.paymentReturnTime = Date.now();
             paymentData.status = 'completed';
             paymentData.confirmationSent = new Date().toISOString();
             
-            // Mettre à jour le paiement courant
             const currentPayment = JSON.parse(localStorage.getItem('currentPayment') || '{}');
             currentPayment.status = 'completed';
             currentPayment.paymentReturnTime = Date.now();
             currentPayment.confirmationSent = paymentData.confirmationSent;
             localStorage.setItem('currentPayment', JSON.stringify(currentPayment));
             
-            // Générer et envoyer automatiquement le message WhatsApp
-            sendAutomaticWhatsAppConfirmation();
-            
-            // Notification
-            showNotification("Paiement effectué ! Envoi de la confirmation...", "success");
+            document.getElementById('loader').style.display = 'none';
+            showVerificationSection();
+            showNotification("Paiement effectué ! Vérifiez les informations", "success");
         }
 
-        function sendAutomaticWhatsAppConfirmation() {
-            // Générer le message WhatsApp
-            const whatsappMessage = generateWhatsAppMessage();
+        function showVerificationSection() {
+            // Remplir les détails de vérification
+            document.getElementById('verify-name').textContent = paymentData.clientName || 'Non spécifié';
+            document.getElementById('verify-phone').textContent = paymentData.clientPhone || 'Non spécifié';
+            document.getElementById('verify-formation').textContent = 
+                FORMATION_NAMES[paymentData.formation] || paymentData.formation;
+            document.getElementById('verify-amount').textContent = paymentData.amount + '€';
+            document.getElementById('verify-reference').textContent = paymentData.reference;
+            document.getElementById('verify-date').textContent = new Date().toLocaleDateString('fr-FR');
             
-            // Créer le lien WhatsApp
+            // Afficher la section
+            document.getElementById('verification-section').classList.add('active');
+            document.getElementById('verification-section').style.display = 'block';
+            
+            // Scroll vers la section
+            setTimeout(() => {
+                document.getElementById('verification-section').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }, 300);
+        }
+
+        function sendWhatsAppConfirmation() {
+            const whatsappMessage = generateWhatsAppMessage();
             const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
             
-            // Sauvegarder le paiement dans l'historique AVANT d'ouvrir WhatsApp
+            // Sauvegarder d'abord dans l'historique
             savePaymentToHistory();
-            
-            // Enregistrer l'envoi
             saveConfirmationSent();
             
-            // Masquer le loader
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('confirmation-info').style.display = 'none';
+            // Masquer la section de vérification
+            document.getElementById('verification-section').classList.remove('active');
+            document.getElementById('verification-section').style.display = 'none';
             
             // Afficher la section succès
             showSuccessSection();
             
-            // Ouvrir WhatsApp après un court délai
+            // Ouvrir WhatsApp après un délai
             setTimeout(() => {
                 window.open(whatsappLink, '_blank');
-            }, 1500);
+            }, 1000);
             
-            // Réinitialiser après envoi
+            // Réinitialiser après un délai
             setTimeout(() => {
                 resetProcessingState();
-            }, 3000);
+            }, 2000);
+            
+            showNotification("Confirmation envoyée avec succès !", "success");
         }
 
         function showSuccessSection() {
-            // Masquer toutes les autres sections
-            document.getElementById('client-form').style.display = 'none';
-            document.getElementById('confirmation-info').style.display = 'none';
-            document.getElementById('loader').style.display = 'none';
-            
-            // Afficher la section succès
+            document.getElementById('success-section').classList.add('active');
             document.getElementById('success-section').style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('success-section').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }, 300);
         }
 
         function updateAmountDisplay() {
@@ -1237,7 +1390,6 @@
         }
 
         function goToHomePage() {
-            // Rediriger vers la boutique
             window.location.href = HOME_PAGE_URL;
         }
 
@@ -1247,7 +1399,6 @@
             const month = (date.getMonth() + 1).toString().padStart(2, '0');
             const day = date.getDate().toString().padStart(2, '0');
             const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-            
             return `BP${year}${month}${day}${random}`;
         }
 
@@ -1286,10 +1437,8 @@
 
         function savePaymentToHistory() {
             try {
-                // Récupérer l'historique existant
                 let history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
                 
-                // S'assurer que les données sont complètes
                 const paymentToSave = {
                     ...paymentData,
                     whatsappSent: true,
@@ -1298,21 +1447,15 @@
                     date: new Date().toISOString().split('T')[0]
                 };
                 
-                // Ajouter le nouveau paiement au début
                 history.unshift(paymentToSave);
                 
-                // Limiter à 100 entrées maximum
                 if (history.length > 100) {
                     history = history.slice(0, 100);
                 }
                 
-                // Sauvegarder
                 localStorage.setItem('paymentHistory', JSON.stringify(history));
-                
-                // Effacer le paiement courant
                 localStorage.removeItem('currentPayment');
                 
-                // Mettre à jour l'affichage si on est sur l'onglet historique
                 if (document.getElementById('history-tab').classList.contains('active')) {
                     loadPaymentHistory();
                     updateStats();
@@ -1320,7 +1463,7 @@
                 
                 return history;
             } catch (error) {
-                console.error("Erreur lors de la sauvegarde de l'historique:", error);
+                console.error("Erreur lors de la sauvegarde:", error);
                 showNotification("Erreur lors de la sauvegarde", "error");
                 return [];
             }
@@ -1331,7 +1474,6 @@
                 const historySection = document.getElementById('history-section');
                 const history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
                 
-                // Filtrer les paiements selon le filtre actif
                 const filterFunction = getDateFilter(currentFilter);
                 const filteredHistory = history.filter(payment => {
                     const paymentDate = payment.confirmationSent || payment.timestamp || Date.now();
@@ -1343,7 +1485,7 @@
                         <div class="no-history">
                             <i class="fas fa-history"></i>
                             <p>Aucun paiement enregistré</p>
-                            <p style="font-size: 12px; margin-top: 10px; color: #888;">
+                            <p style="font-size: 13px; margin-top: 12px; color: #888;">
                                 ${getFilterMessage(currentFilter)}
                             </p>
                         </div>
@@ -1351,7 +1493,6 @@
                     return;
                 }
                 
-                // Trier par date (plus récent d'abord)
                 filteredHistory.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                 
                 let historyHTML = '';
@@ -1360,12 +1501,12 @@
                     const formationName = FORMATION_NAMES[payment.formation] || payment.formation || 'Non spécifiée';
                     const dateFormatted = formatDate(payment.confirmationSent || payment.timestamp || Date.now());
                     const statusClass = payment.status === 'completed' ? 'status-completed' : 'status-pending';
-                    const statusText = payment.status === 'completed' ? 'Confirmé' : 'En attente';
+                    const statusText = payment.status === 'completed' ? 'Confirmé ✓' : 'En attente';
                     const clientName = payment.clientName || 'Non spécifié';
                     const clientPhone = payment.clientPhone || 'Non spécifié';
                     const amount = payment.amount || 0;
                     const reference = payment.reference || 'N/A';
-                    const whatsappIcon = payment.whatsappSent ? '<i class="fab fa-whatsapp" style="color: #25D366; margin-left: 5px;"></i>' : '';
+                    const whatsappIcon = payment.whatsappSent ? '📱' : '';
                     
                     historyHTML += `
                         <div class="history-item">
@@ -1399,7 +1540,6 @@
                 
                 historySection.innerHTML = historyHTML;
                 
-                // Afficher les stats si on a des résultats
                 if (filteredHistory.length > 0) {
                     document.getElementById('history-stats').style.display = 'block';
                 } else {
@@ -1407,12 +1547,12 @@
                 }
                 
             } catch (error) {
-                console.error("Erreur lors du chargement de l'historique:", error);
+                console.error("Erreur lors du chargement:", error);
                 document.getElementById('history-section').innerHTML = `
                     <div class="no-history">
                         <i class="fas fa-exclamation-triangle"></i>
                         <p>Erreur lors du chargement</p>
-                        <p style="font-size: 12px; margin-top: 10px; color: #888;">
+                        <p style="font-size: 13px; margin-top: 12px; color: #888;">
                             Impossible de charger l'historique
                         </p>
                     </div>
@@ -1434,7 +1574,6 @@
                     return;
                 }
                 
-                // Calculer les statistiques
                 const totalAmount = filteredHistory.reduce((sum, payment) => sum + (payment.amount || 0), 0);
                 const averageAmount = filteredHistory.length > 0 ? Math.round(totalAmount / filteredHistory.length) : 0;
                 const today = new Date().toISOString().split('T')[0];
@@ -1466,7 +1605,7 @@
                 document.getElementById('history-stats').style.display = 'block';
                 
             } catch (error) {
-                console.error("Erreur lors du calcul des statistiques:", error);
+                console.error("Erreur lors du calcul:", error);
                 document.getElementById('history-stats').style.display = 'none';
             }
         }
@@ -1482,11 +1621,9 @@
             return messages[filter] || 'Aucun paiement enregistré';
         }
 
-        function resetPaymentForm() {
-            // Réinitialiser l'état de traitement
+        function resetPaymentProcess() {
             resetProcessingState();
             
-            // Réinitialiser les données
             paymentData = {
                 amount: 299,
                 formation: 'maquillage',
@@ -1506,21 +1643,27 @@
             document.getElementById('client-email').value = '';
             document.getElementById('client-formation').value = 'maquillage';
             
-            // Réafficher le formulaire
+            // Réafficher le formulaire initial
             document.getElementById('client-form').style.display = 'block';
+            document.getElementById('success-section').classList.remove('active');
             document.getElementById('success-section').style.display = 'none';
-            document.getElementById('confirmation-info').style.display = 'none';
+            document.getElementById('verification-section').classList.remove('active');
+            document.getElementById('verification-section').style.display = 'none';
             document.getElementById('loader').style.display = 'none';
-            document.getElementById('paypal-btn').style.display = 'inline-flex';
+            document.getElementById('instructions').style.display = 'block';
             
-            // Mettre à jour l'affichage
             updateAmountDisplay();
-            
-            // Effacer le paiement courant s'il existe
             localStorage.removeItem('currentPayment');
             
-            // Notification
-            showNotification("Formulaire réinitialisé. Prêt pour un nouveau paiement", "success");
+            showNotification("Prêt pour un nouveau paiement", "success");
+            
+            // Scroll vers le haut
+            setTimeout(() => {
+                document.getElementById('client-form').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 300);
         }
 
         function resetProcessingState() {
@@ -1557,7 +1700,7 @@
         function highlightError(fieldId) {
             const field = document.getElementById(fieldId);
             field.style.borderColor = '#f44336';
-            field.style.boxShadow = '0 0 0 2px rgba(244, 67, 54, 0.2)';
+            field.style.boxShadow = '0 0 0 3px rgba(244, 67, 54, 0.2)';
             
             setTimeout(() => {
                 field.style.borderColor = '';
@@ -1590,18 +1733,17 @@
                     updateFormationDetails(savedForm.formation);
                 }
             } catch (error) {
-                console.error("Erreur lors du chargement des données:", error);
+                console.error("Erreur lors du chargement:", error);
             }
         }
 
         function saveConfirmationSent() {
             try {
-                // Compter les confirmations
                 let confirmations = parseInt(localStorage.getItem('totalConfirmationsSent') || '0');
                 confirmations++;
                 localStorage.setItem('totalConfirmationsSent', confirmations.toString());
             } catch (error) {
-                console.error("Erreur lors de la sauvegarde du compteur:", error);
+                console.error("Erreur lors de la sauvegarde:", error);
             }
         }
 
@@ -1610,39 +1752,37 @@
             const currentDate = new Date().toLocaleDateString('fr-FR');
             const currentTime = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
             
-            let message = `✅ *NOUVEAU PAIEMENT FORMATION BEAUTÉ PRO* ✅\n\n`;
+            let message = `✅ *NOUVEAU PAIEMENT FORMATION - BEAUTÉ PRO* ✅\n\n`;
             
-            message += `📋 *INFORMATIONS DU CLIENT:*\n`;
+            message += `📋 *INFORMATIONS CLIENT:*\n`;
             message += `👤 *Nom:* ${paymentData.clientName || 'Non spécifié'}\n`;
             message += `📱 *Téléphone:* ${paymentData.clientPhone || 'Non spécifié'}\n`;
             if (paymentData.clientEmail) {
                 message += `📧 *Email:* ${paymentData.clientEmail}\n`;
             }
             
-            message += `\n🎓 *FORMATION CHOISIE:*\n`;
-            message += `📚 *Type:* ${formationName}\n`;
-            message += `💰 *Montant payé:* ${paymentData.amount || 0}€\n`;
-            message += `💳 *Méthode de paiement:* ${paymentData.paymentMethod || 'PayPal'}\n`;
+            message += `\n🎓 *DÉTAILS FORMATION:*\n`;
+            message += `📚 *Formation:* ${formationName}\n`;
+            message += `💰 *Montant:* ${paymentData.amount || 0}€\n`;
+            message += `💳 *Méthode:* ${paymentData.paymentMethod || 'PayPal'}\n`;
             
-            message += `\n📝 *DÉTAILS TECHNIQUES:*\n`;
+            message += `\n📝 *INFORMATIONS TECHNIQUES:*\n`;
             message += `🔢 *Référence:* ${paymentData.reference || 'N/A'}\n`;
-            message += `📅 *Date du paiement:* ${currentDate}\n`;
+            message += `📅 *Date:* ${currentDate}\n`;
             message += `⏰ *Heure:* ${currentTime}\n`;
-            message += `🆔 *ID Transaction:* ${Date.now().toString().slice(-8)}\n`;
+            message += `🆔 *Transaction ID:* ${Date.now().toString().slice(-8)}\n`;
             
-            message += `\n🔄 *STATUT:* PAIEMENT CONFIRMÉ\n\n`;
-            message += `Merci de valider cette inscription et d'envoyer les accès à la formation.\n`;
-            message += `Client à contacter pour les détails d'accès.\n\n`;
-            message += `_Message généré automatiquement depuis le système de paiement_`;
+            message += `\n🔄 *STATUT:* PAIEMENT CONFIRMÉ ET VALIDÉ\n\n`;
+            message += `Merci de procéder à l'activation de la formation et d'envoyer les accès au client.\n`;
+            message += `Le client attend la confirmation et les instructions d'accès.\n\n`;
+            message += `_Message généré automatiquement - Système de paiement Beauté Pro_`;
             
             return message;
         }
 
         function showNotification(message, type) {
-            // Supprimer les anciennes notifications
             document.querySelectorAll('.notification').forEach(n => n.remove());
             
-            // Créer la notification
             const notification = document.createElement('div');
             notification.className = 'notification';
             
@@ -1656,21 +1796,21 @@
             notification.innerHTML = `
                 <div style="
                     position: fixed;
-                    top: 15px;
-                    right: 15px;
-                    left: 15px;
-                    max-width: 300px;
+                    top: 20px;
+                    right: 20px;
+                    left: 20px;
+                    max-width: 320px;
                     margin: 0 auto;
-                    padding: 12px 16px;
-                    border-radius: 8px;
+                    padding: 14px 18px;
+                    border-radius: 10px;
                     color: white;
-                    font-weight: 600;
-                    font-size: 13px;
+                    font-weight: 700;
+                    font-size: 14px;
                     z-index: 1500;
                     animation: slideDown 0.3s ease;
                     background: ${colors[type] || colors.info};
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                    border-left: 4px solid rgba(255,255,255,0.3);
+                    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+                    border-left: 5px solid rgba(255,255,255,0.3);
                     text-align: center;
                 ">
                     ${message}
@@ -1679,24 +1819,22 @@
             
             document.body.appendChild(notification);
             
-            // Supprimer après 3 secondes
             setTimeout(() => {
                 notification.style.animation = 'slideUp 0.3s ease';
                 setTimeout(() => notification.remove(), 300);
             }, 3000);
             
-            // Ajouter les animations CSS si nécessaire
             if (!document.querySelector('#notif-anim')) {
                 const style = document.createElement('style');
                 style.id = 'notif-anim';
                 style.textContent = `
                     @keyframes slideDown {
-                        from { transform: translateY(-60px); opacity: 0; }
+                        from { transform: translateY(-70px); opacity: 0; }
                         to { transform: translateY(0); opacity: 1; }
                     }
                     @keyframes slideUp {
                         from { transform: translateY(0); opacity: 1; }
-                        to { transform: translateY(-60px); opacity: 0; }
+                        to { transform: translateY(-70px); opacity: 0; }
                     }
                 `;
                 document.head.appendChild(style);
