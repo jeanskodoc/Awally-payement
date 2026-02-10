@@ -253,6 +253,7 @@
             max-height: 400px;
             overflow-y: auto;
             padding-right: 5px;
+            margin-top: 15px;
         }
         
         .history-item {
@@ -569,6 +570,84 @@
             line-height: 1.4;
         }
         
+        /* Filtres Historique */
+        .history-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background: #e0e0e0;
+            border-color: #ccc;
+        }
+        
+        /* Stats Historique */
+        .history-stats {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #90caf9;
+            text-align: center;
+            display: none;
+        }
+        
+        .history-stats.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .stats-title {
+            color: #1565c0;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        
+        .stats-content {
+            display: flex;
+            justify-content: space-around;
+            font-size: 11px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 14px;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 2px;
+        }
+        
         /* Footer */
         .payment-footer {
             text-align: center;
@@ -629,6 +708,15 @@
             .tab-btn {
                 font-size: 11px;
                 padding: 8px;
+            }
+            
+            .history-filters {
+                gap: 6px;
+            }
+            
+            .filter-btn {
+                padding: 5px 10px;
+                font-size: 10px;
             }
         }
         
@@ -795,6 +883,41 @@
                     </p>
                 </div>
                 
+                <!-- Statistiques -->
+                <div class="history-stats" id="history-stats">
+                    <div class="stats-title">
+                        <i class="fas fa-chart-bar"></i>
+                        Statistiques du jour
+                    </div>
+                    <div class="stats-content" id="stats-content">
+                        <!-- Les stats seront ajoutées par JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Filtres Historique -->
+                <div class="history-filters">
+                    <button class="filter-btn active" data-filter="today">
+                        <i class="fas fa-calendar-day"></i>
+                        Aujourd'hui
+                    </button>
+                    <button class="filter-btn" data-filter="yesterday">
+                        <i class="fas fa-calendar-alt"></i>
+                        Hier
+                    </button>
+                    <button class="filter-btn" data-filter="week">
+                        <i class="fas fa-calendar-week"></i>
+                        7 jours
+                    </button>
+                    <button class="filter-btn" data-filter="month">
+                        <i class="fas fa-calendar"></i>
+                        30 jours
+                    </button>
+                    <button class="filter-btn" data-filter="all">
+                        <i class="fas fa-list"></i>
+                        Tout
+                    </button>
+                </div>
+                
                 <!-- Historique des paiements -->
                 <div class="history-section" id="history-section">
                     <!-- Les paiements seront chargés ici par JavaScript -->
@@ -859,6 +982,8 @@
         
         let countdownInterval;
         let countdownSeconds = 5;
+        let isProcessingPayment = false;
+        let currentFilter = 'today';
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -874,6 +999,9 @@
             
             // Mettre à jour la référence
             paymentData.reference = generateReference();
+            
+            // Vérifier s'il y a un paiement en cours
+            checkForPendingPayment();
         }
 
         function setupEventListeners() {
@@ -888,7 +1016,9 @@
             // Bouton PayPal
             document.getElementById('paypal-btn').addEventListener('click', function(e) {
                 e.preventDefault();
-                startPaymentProcess();
+                if (!isProcessingPayment) {
+                    startPaymentProcess();
+                }
             });
             
             // Changement de formation
@@ -919,6 +1049,30 @@
                 input.addEventListener('input', saveFormData);
                 input.addEventListener('change', saveFormData);
             });
+            
+            // Filtres historiques
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    setHistoryFilter(filter);
+                });
+            });
+        }
+
+        function checkForPendingPayment() {
+            const currentPayment = JSON.parse(localStorage.getItem('currentPayment') || '{}');
+            if (currentPayment.reference && currentPayment.status === 'pending') {
+                // Il y a un paiement en attente
+                paymentData = { ...paymentData, ...currentPayment };
+                isProcessingPayment = true;
+                
+                // Afficher la section de confirmation
+                setTimeout(() => {
+                    showConfirmationSection();
+                }, 500);
+                
+                showNotification("Paiement en cours détecté", "info");
+            }
         }
 
         function switchTab(tabId) {
@@ -938,19 +1092,53 @@
             // Recharger l'historique si on passe sur cet onglet
             if (tabId === 'history') {
                 loadPaymentHistory();
+                updateStats();
             }
         }
 
+        function setHistoryFilter(filter) {
+            // Mettre à jour le filtre actif
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`.filter-btn[data-filter="${filter}"]`).classList.add('active');
+            
+            currentFilter = filter;
+            loadPaymentHistory();
+            updateStats();
+        }
+
         function startPaymentProcess() {
+            if (isProcessingPayment) {
+                showNotification("Un paiement est déjà en cours", "warning");
+                return;
+            }
+            
             // Ouvrir PayPal dans un nouvel onglet
             const paypalWindow = window.open(PAYPAL_ME_LINK, '_blank', 'noopener,noreferrer');
+            
+            if (!paypalWindow) {
+                showNotification("Veuillez autoriser les popups pour PayPal", "error");
+                return;
+            }
+            
+            // Marquer comme en cours de traitement
+            isProcessingPayment = true;
             
             // Enregistrer le début du paiement
             paymentData.paymentStartTime = Date.now();
             paymentData.reference = generateReference();
             paymentData.status = 'pending';
+            paymentData.date = new Date().toISOString().split('T')[0];
             
-            localStorage.setItem('currentPayment', JSON.stringify(paymentData));
+            // Créer une copie propre des données
+            const paymentToSave = {
+                ...paymentData,
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem('currentPayment', JSON.stringify(paymentToSave));
             
             // Afficher notification
             showNotification("Redirection vers PayPal...", "info");
@@ -1015,7 +1203,12 @@
             }, 1000);
             
             // Arrêter de vérifier après 10 minutes
-            setTimeout(() => clearInterval(checkInterval), 600000);
+            setTimeout(() => {
+                clearInterval(checkInterval);
+                if (isProcessingPayment) {
+                    isProcessingPayment = false;
+                }
+            }, 600000);
         }
 
         function updateFormationDetails(formationId) {
@@ -1055,13 +1248,24 @@
             window.open(whatsappLink, '_blank');
             
             // Sauvegarder le paiement dans l'historique
-            savePaymentToHistory();
+            const savedHistory = savePaymentToHistory();
             
             // Enregistrer l'envoi
             saveConfirmationSent();
             
+            // Réinitialiser l'état de traitement
+            isProcessingPayment = false;
+            
+            // Effacer le paiement courant
+            localStorage.removeItem('currentPayment');
+            
             // Notification
             showNotification("Confirmation envoyée !", "success");
+            
+            // Mettre à jour les stats si on est sur l'onglet historique
+            if (document.getElementById('history-tab').classList.contains('active')) {
+                updateStats();
+            }
             
             // Afficher la section succès après 1 seconde
             setTimeout(() => {
@@ -1084,6 +1288,7 @@
             
             // Afficher la section succès
             document.getElementById('success-section').classList.add('active');
+            document.getElementById('success-section').style.display = 'block';
         }
 
         function startCountdown() {
@@ -1099,9 +1304,16 @@
                 // Quand le compte à rebours arrive à 0
                 if (countdownSeconds <= 0) {
                     clearInterval(countdownInterval);
+                    resetPaymentForm();
                     goToHomePage();
                 }
             }, 1000);
+        }
+
+        function stopCountdown() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
         }
 
         function goToHomePage() {
@@ -1133,94 +1345,230 @@
             });
         }
 
+        function getDateFilter(filter) {
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const weekAgo = new Date(today);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const monthAgo = new Date(today);
+            monthAgo.setDate(monthAgo.getDate() - 30);
+            
+            return {
+                today: (date) => new Date(date) >= today,
+                yesterday: (date) => {
+                    const paymentDate = new Date(date);
+                    return paymentDate >= yesterday && paymentDate < today;
+                },
+                week: (date) => new Date(date) >= weekAgo,
+                month: (date) => new Date(date) >= monthAgo,
+                all: () => true
+            }[filter] || (() => true);
+        }
+
         function savePaymentToHistory() {
-            // Récupérer l'historique existant
-            let history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
-            
-            // Ajouter le nouveau paiement
-            history.unshift({
-                ...paymentData,
-                confirmationSent: new Date().toISOString(),
-                whatsappSent: true,
-                whatsappNumber: WHATSAPP_NUMBER
-            });
-            
-            // Limiter à 50 entrées maximum
-            if (history.length > 50) {
-                history = history.slice(0, 50);
+            try {
+                // Récupérer l'historique existant
+                let history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+                
+                // S'assurer que les données sont complètes
+                const paymentToSave = {
+                    ...paymentData,
+                    confirmationSent: new Date().toISOString(),
+                    whatsappSent: true,
+                    whatsappNumber: WHATSAPP_NUMBER,
+                    timestamp: Date.now(),
+                    date: new Date().toISOString().split('T')[0] // Ajouter la date du jour
+                };
+                
+                // Ajouter le nouveau paiement au début
+                history.unshift(paymentToSave);
+                
+                // Limiter à 100 entrées maximum
+                if (history.length > 100) {
+                    history = history.slice(0, 100);
+                }
+                
+                // Sauvegarder
+                localStorage.setItem('paymentHistory', JSON.stringify(history));
+                
+                // Mettre à jour l'affichage si on est sur l'onglet historique
+                if (document.getElementById('history-tab').classList.contains('active')) {
+                    loadPaymentHistory();
+                    updateStats();
+                }
+                
+                return history;
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde de l'historique:", error);
+                showNotification("Erreur lors de la sauvegarde", "error");
+                return [];
             }
-            
-            // Sauvegarder
-            localStorage.setItem('paymentHistory', JSON.stringify(history));
-            
-            // Effacer le paiement courant
-            localStorage.removeItem('currentPayment');
-            
-            return history;
         }
 
         function loadPaymentHistory() {
-            const historySection = document.getElementById('history-section');
-            const history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
-            
-            if (history.length === 0) {
-                historySection.innerHTML = `
+            try {
+                const historySection = document.getElementById('history-section');
+                const history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+                
+                // Filtrer les paiements selon le filtre actif
+                const filterFunction = getDateFilter(currentFilter);
+                const filteredHistory = history.filter(payment => {
+                    const paymentDate = payment.confirmationSent || payment.timestamp || Date.now();
+                    return filterFunction(paymentDate);
+                });
+                
+                if (filteredHistory.length === 0) {
+                    historySection.innerHTML = `
+                        <div class="no-history">
+                            <i class="fas fa-history"></i>
+                            <p>Aucun paiement enregistré</p>
+                            <p style="font-size: 12px; margin-top: 10px; color: #888;">
+                                ${getFilterMessage(currentFilter)}
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Trier par date (plus récent d'abord)
+                filteredHistory.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                
+                let historyHTML = '';
+                
+                filteredHistory.forEach((payment, index) => {
+                    const formationName = FORMATION_NAMES[payment.formation] || payment.formation || 'Non spécifiée';
+                    const dateFormatted = formatDate(payment.confirmationSent || payment.timestamp || Date.now());
+                    const statusClass = payment.status === 'completed' ? 'status-completed' : 'status-pending';
+                    const statusText = payment.status === 'completed' ? 'Confirmé' : 'En attente';
+                    const clientName = payment.clientName || 'Non spécifié';
+                    const clientPhone = payment.clientPhone || 'Non spécifié';
+                    const amount = payment.amount || 0;
+                    const reference = payment.reference || 'N/A';
+                    
+                    historyHTML += `
+                        <div class="history-item">
+                            <div class="history-header">
+                                <span class="history-reference">${reference}</span>
+                                <span class="history-date">${dateFormatted}</span>
+                            </div>
+                            <div class="history-details">
+                                <div class="history-detail-item">
+                                    <span class="history-label">Client:</span>
+                                    <span class="history-value">${clientName}</span>
+                                </div>
+                                <div class="history-detail-item">
+                                    <span class="history-label">Formation:</span>
+                                    <span class="history-value">${formationName}</span>
+                                </div>
+                                <div class="history-detail-item">
+                                    <span class="history-label">Téléphone:</span>
+                                    <span class="history-value">${clientPhone}</span>
+                                </div>
+                                <div class="history-amount">
+                                    ${amount}€
+                                </div>
+                                <div class="history-status ${statusClass}">
+                                    ${statusText}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                historySection.innerHTML = historyHTML;
+                
+                // Afficher les stats si on a des résultats
+                if (filteredHistory.length > 0) {
+                    document.getElementById('history-stats').classList.add('show');
+                } else {
+                    document.getElementById('history-stats').classList.remove('show');
+                }
+                
+            } catch (error) {
+                console.error("Erreur lors du chargement de l'historique:", error);
+                document.getElementById('history-section').innerHTML = `
                     <div class="no-history">
-                        <i class="fas fa-history"></i>
-                        <p>Aucun paiement enregistré</p>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Erreur lors du chargement</p>
                         <p style="font-size: 12px; margin-top: 10px; color: #888;">
-                            Vos paiements apparaîtront ici après confirmation
+                            Impossible de charger l'historique
                         </p>
                     </div>
                 `;
-                return;
             }
-            
-            // Trier par date (plus récent d'abord)
-            history.sort((a, b) => new Date(b.timestamp || b.confirmationSent) - new Date(a.timestamp || a.confirmationSent));
-            
-            let historyHTML = '';
-            
-            history.forEach((payment, index) => {
-                const formationName = FORMATION_NAMES[payment.formation] || payment.formation;
-                const dateFormatted = formatDate(payment.confirmationSent || payment.timestamp || Date.now());
-                const statusClass = payment.status === 'completed' ? 'status-completed' : 'status-pending';
-                const statusText = payment.status === 'completed' ? 'Confirmé' : 'En attente';
+        }
+
+        function updateStats() {
+            try {
+                const history = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+                const filterFunction = getDateFilter(currentFilter);
+                const filteredHistory = history.filter(payment => {
+                    const paymentDate = payment.confirmationSent || payment.timestamp || Date.now();
+                    return filterFunction(paymentDate);
+                });
                 
-                historyHTML += `
-                    <div class="history-item">
-                        <div class="history-header">
-                            <span class="history-reference">${payment.reference || 'N/A'}</span>
-                            <span class="history-date">${dateFormatted}</span>
-                        </div>
-                        <div class="history-details">
-                            <div class="history-detail-item">
-                                <span class="history-label">Client:</span>
-                                <span class="history-value">${payment.clientName || 'Non spécifié'}</span>
-                            </div>
-                            <div class="history-detail-item">
-                                <span class="history-label">Formation:</span>
-                                <span class="history-value">${formationName}</span>
-                            </div>
-                            <div class="history-detail-item">
-                                <span class="history-label">Téléphone:</span>
-                                <span class="history-value">${payment.clientPhone || 'Non spécifié'}</span>
-                            </div>
-                            <div class="history-amount">
-                                ${payment.amount || 0}€
-                            </div>
-                            <div class="history-status ${statusClass}">
-                                ${statusText}
-                            </div>
-                        </div>
+                if (filteredHistory.length === 0) {
+                    document.getElementById('history-stats').classList.remove('show');
+                    return;
+                }
+                
+                // Calculer les statistiques
+                const totalAmount = filteredHistory.reduce((sum, payment) => sum + (payment.amount || 0), 0);
+                const averageAmount = filteredHistory.length > 0 ? Math.round(totalAmount / filteredHistory.length) : 0;
+                const today = new Date().toISOString().split('T')[0];
+                const todayCount = filteredHistory.filter(p => {
+                    const paymentDate = new Date(p.confirmationSent || p.timestamp || Date.now()).toISOString().split('T')[0];
+                    return paymentDate === today;
+                }).length;
+                
+                const statsHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">${filteredHistory.length}</div>
+                        <div class="stat-label">Paiements</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${totalAmount}€</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${averageAmount}€</div>
+                        <div class="stat-label">Moyenne</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${todayCount}</div>
+                        <div class="stat-label">Aujourd'hui</div>
                     </div>
                 `;
-            });
-            
-            historySection.innerHTML = historyHTML;
+                
+                document.getElementById('stats-content').innerHTML = statsHTML;
+                document.getElementById('history-stats').classList.add('show');
+                
+            } catch (error) {
+                console.error("Erreur lors du calcul des statistiques:", error);
+                document.getElementById('history-stats').classList.remove('show');
+            }
+        }
+
+        function getFilterMessage(filter) {
+            const messages = {
+                'today': 'Aucun paiement enregistré aujourd\'hui',
+                'yesterday': 'Aucun paiement enregistré hier',
+                'week': 'Aucun paiement enregistré cette semaine',
+                'month': 'Aucun paiement enregistré ce mois',
+                'all': 'Aucun paiement enregistré'
+            };
+            return messages[filter] || 'Aucun paiement enregistré';
         }
 
         function resetPaymentForm() {
+            // Arrêter le compte à rebours
+            stopCountdown();
+            
+            // Réinitialiser l'état de traitement
+            isProcessingPayment = false;
+            
             // Réinitialiser les données
             paymentData = {
                 amount: 299,
@@ -1257,8 +1605,11 @@
             // Mettre à jour l'affichage
             updateAmountDisplay();
             
+            // Effacer le paiement courant s'il existe
+            localStorage.removeItem('currentPayment');
+            
             // Notification
-            showNotification("Prêt pour un nouveau paiement", "info");
+            showNotification("Formulaire réinitialisé. Prêt pour un nouveau paiement", "success");
         }
 
         function validateForm() {
@@ -1303,6 +1654,9 @@
             paymentData.formation = document.getElementById('client-formation').value;
             paymentData.amount = FORMATION_PRICES[paymentData.formation] || 299;
             paymentData.timestamp = Date.now();
+            paymentData.status = 'completed';
+            paymentData.reference = paymentData.reference || generateReference();
+            paymentData.date = new Date().toISOString().split('T')[0];
         }
 
         function saveFormData() {
@@ -1318,54 +1672,53 @@
         }
 
         function loadSavedData() {
-            const savedForm = JSON.parse(localStorage.getItem('clientFormData') || '{}');
-            
-            if (savedForm.name) document.getElementById('client-name').value = savedForm.name;
-            if (savedForm.phone) document.getElementById('client-phone').value = savedForm.phone;
-            if (savedForm.email) document.getElementById('client-email').value = savedForm.email;
-            if (savedForm.formation) {
-                document.getElementById('client-formation').value = savedForm.formation;
-                updateFormationDetails(savedForm.formation);
-            }
-            
-            // Charger le paiement courant s'il existe
-            const currentPayment = JSON.parse(localStorage.getItem('currentPayment') || '{}');
-            if (currentPayment.reference && currentPayment.status === 'pending') {
-                paymentData = { ...paymentData, ...currentPayment };
-                setTimeout(() => {
-                    showConfirmationSection();
-                }, 500);
+            try {
+                const savedForm = JSON.parse(localStorage.getItem('clientFormData') || '{}');
+                
+                if (savedForm.name) document.getElementById('client-name').value = savedForm.name;
+                if (savedForm.phone) document.getElementById('client-phone').value = savedForm.phone;
+                if (savedForm.email) document.getElementById('client-email').value = savedForm.email;
+                if (savedForm.formation) {
+                    document.getElementById('client-formation').value = savedForm.formation;
+                    updateFormationDetails(savedForm.formation);
+                }
+            } catch (error) {
+                console.error("Erreur lors du chargement des données:", error);
             }
         }
 
         function saveConfirmationSent() {
-            // Compter les confirmations
-            let confirmations = parseInt(localStorage.getItem('totalConfirmationsSent') || '0');
-            confirmations++;
-            localStorage.setItem('totalConfirmationsSent', confirmations.toString());
+            try {
+                // Compter les confirmations
+                let confirmations = parseInt(localStorage.getItem('totalConfirmationsSent') || '0');
+                confirmations++;
+                localStorage.setItem('totalConfirmationsSent', confirmations.toString());
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde du compteur:", error);
+            }
         }
 
         function generateWhatsAppMessage() {
-            const formationName = FORMATION_NAMES[paymentData.formation] || paymentData.formation;
+            const formationName = FORMATION_NAMES[paymentData.formation] || paymentData.formation || 'Formation';
             const currentDate = new Date().toLocaleDateString('fr-FR');
             const currentTime = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
             
             let message = `✅ *NOUVELLE CONFIRMATION DE PAIEMENT* ✅\n\n`;
             
             message += `📋 *INFORMATIONS DU CLIENT:*\n`;
-            message += `👤 *Nom:* ${paymentData.clientName}\n`;
-            message += `📱 *Téléphone:* ${paymentData.clientPhone}\n`;
+            message += `👤 *Nom:* ${paymentData.clientName || 'Non spécifié'}\n`;
+            message += `📱 *Téléphone:* ${paymentData.clientPhone || 'Non spécifié'}\n`;
             if (paymentData.clientEmail) {
                 message += `📧 *Email:* ${paymentData.clientEmail}\n`;
             }
             
             message += `\n🎓 *FORMATION CHOISIE:*\n`;
             message += `📚 *Type:* ${formationName}\n`;
-            message += `💰 *Montant payé:* ${paymentData.amount}€\n`;
-            message += `💳 *Méthode:* ${paymentData.paymentMethod}\n`;
+            message += `💰 *Montant payé:* ${paymentData.amount || 0}€\n`;
+            message += `💳 *Méthode:* ${paymentData.paymentMethod || 'PayPal'}\n`;
             
             message += `\n📝 *DÉTAILS TECHNIQUES:*\n`;
-            message += `🔢 *Référence:* ${paymentData.reference}\n`;
+            message += `🔢 *Référence:* ${paymentData.reference || 'N/A'}\n`;
             message += `📅 *Date:* ${currentDate}\n`;
             message += `⏰ *Heure:* ${currentTime}\n`;
             
