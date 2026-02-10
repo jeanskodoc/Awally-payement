@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#e91e63">
-    <title>Paiement PayPal - Beauté Pro</title>
+    <title>Paiement Formation - Beauté Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -604,11 +604,11 @@
                 <div class="paypal-btn-container">
                     <button class="home-btn" id="home-btn">
                         <i class="fas fa-home"></i>
-                        Retour à l'accueil
+                        Retour à la boutique
                     </button>
                 </div>
                 <p style="font-size: 11px; color: #666; margin-top: 15px;">
-                    Redirection automatique dans <span id="countdown">10</span> secondes...
+                    Redirection automatique dans <span id="countdown">5</span> secondes...
                 </p>
             </div>
             
@@ -636,7 +636,7 @@
         // Numéro WhatsApp pour envoi
         const WHATSAPP_NUMBER = "+33756950190";
         const PAYPAL_ME_LINK = "https://paypal.me/JEANSKODOC?locale.x=fr_XC&country.x=LS";
-        const HOME_PAGE_URL = "formations.html"; // Page d'accueil
+        const HOME_PAGE_URL = "https://boutique-awa.netlify.app/"; // VOTRE PAGE D'ACCUEIL
         
         // Prix des formations
         const FORMATION_PRICES = {
@@ -666,7 +666,7 @@
         };
         
         let countdownInterval;
-        let countdownSeconds = 10;
+        let countdownSeconds = 5; // Réduit à 5 secondes pour une meilleure UX
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -706,7 +706,7 @@
                 sendWhatsAppConfirmation();
             });
             
-            // Bouton Accueil
+            // Bouton Accueil (Boutique)
             document.getElementById('home-btn').addEventListener('click', function() {
                 goToHomePage();
             });
@@ -837,8 +837,8 @@
                 showSuccessSection();
             }, 1000);
             
-            // Détecter la fermeture de WhatsApp pour démarrer le compte à rebours
-            checkWhatsAppClose(whatsappWindow);
+            // Démarrer le compte à rebours immédiatement (sans attendre la fermeture de WhatsApp)
+            startCountdown();
         }
 
         function showSuccessSection() {
@@ -853,14 +853,11 @@
             
             // Afficher la section succès
             document.getElementById('success-section').classList.add('active');
-            
-            // Démarrer le compte à rebours
-            startCountdown();
         }
 
         function startCountdown() {
             const countdownElement = document.getElementById('countdown');
-            countdownSeconds = 10;
+            countdownSeconds = 5; // 5 secondes seulement
             countdownElement.textContent = countdownSeconds;
             
             // Démarrer le compte à rebours
@@ -890,25 +887,8 @@
             localStorage.removeItem('paymentStartTime');
             localStorage.removeItem('paymentCompleted');
             
-            // Rediriger vers la page d'accueil
+            // Rediriger vers VOTRE page d'accueil
             window.location.href = HOME_PAGE_URL;
-        }
-
-        function checkWhatsAppClose(whatsappWindow) {
-            // Vérifier si WhatsApp est fermé pour démarrer le compte à rebours plus tôt
-            const checkInterval = setInterval(() => {
-                if (whatsappWindow.closed) {
-                    clearInterval(checkInterval);
-                    
-                    // Si la section succès n'est pas encore affichée, l'afficher
-                    if (!document.getElementById('success-section').classList.contains('active')) {
-                        showSuccessSection();
-                    }
-                }
-            }, 500);
-            
-            // Arrêter de vérifier après 30 secondes
-            setTimeout(() => clearInterval(checkInterval), 30000);
         }
 
         function generateWhatsAppMessage() {
@@ -1051,6 +1031,7 @@
                 // Afficher directement la section succès
                 setTimeout(() => {
                     showSuccessSection();
+                    startCountdown();
                 }, 500);
             }
         }
